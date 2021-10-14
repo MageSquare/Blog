@@ -1,0 +1,2 @@
+# Blog
+MageSquare Blog Extension
