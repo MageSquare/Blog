@@ -1,0 +1,30 @@
+{
+    "name": "magesquare/blog",
+    "description": "MageSquare Blog Pro",
+    "require": {
+        "php": "^7.1.0",
+        "magesquare/base": ">=1.12.5",
+        "magesquare/email-unsubscribe": ">=1.0.0",
+        "magesquare/cron-schedule-list": ">=1.0.5",
+        "magento/framework": ">=102.0.0",
+        "magento/module-catalog": "*"
+    },
+    "suggest": {
+        "magesquare/blog-page-builder": "Install blog-page-builder module to activate PageBuilder and Blog Pro integration.",
+        "magesquare/blog-graphql": "Install blog-graphql module to activate Graphql and Blog Pro integration.",
+        "magesquare/module-blog-mftf-3": "Install module-blog-mftf-3 module to be able to run Blog Pro MFTF tests for Magento 2.4.0+ version."
+    },
+    "type": "magento2-module",
+    "version": "2.7.1",
+    "license": [
+        "Commercial"
+    ],
+    "autoload": {
+        "files": [
+            "registration.php"
+        ],
+        "psr-4": {
+            "MageSquare\\Blog\\": ""
+        }
+    }
+}
