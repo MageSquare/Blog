@@ -1,0 +1,50 @@
+<?xml version="1.0"?>
+<!--
+/**
+ * @author MageSquare Team
+ * @copyright Copyright (c) 2021 MageSquare 
+ * @package MageSquare_Blog
+ */
+-->
+<page xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" layout="1column" xsi:noNamespaceSchemaLocation="urn:magento:framework:View/Layout/etc/page_configuration.xsd">
+    <update handle="msblog_default"/>
+
+    <body>
+        <referenceContainer name="header">
+            <block class="MageSquare\Blog\Block\Content\Lists\Wrapper" name="msblog.content.list.wrapper" as="msblog_content_list_wrapper" />
+        </referenceContainer>
+
+        <referenceContainer name="columns.top">
+            <container name="msblog.category.view.container" htmlTag="div" htmlClass="msblog-category-view" after="-">
+                <block
+                    class="Magento\Framework\View\Element\Template"
+                    name="msblog.category.description"
+                    template="MageSquare_Blog::category/description.phtml"
+                >
+                    <arguments>
+                        <argument name="view_model" xsi:type="object">
+                            MageSquare\Blog\ViewModel\Category\Description
+                        </argument>
+                        <argument name="content_preparation" xsi:type="object">
+                            MageSquare\Blog\ViewModel\ContentPreparation\WysiwygContent
+                        </argument>
+                    </arguments>
+                </block>
+            </container>
+        </referenceContainer>
+
+        <referenceContainer name="layout.content">
+
+            <block class="MageSquare\Blog\Block\Content\Category"
+                   name="msblog.content.list"
+                   as="list"
+                   template="MageSquare_Blog::list.phtml"/>
+
+            <block class="MageSquare\Blog\Block\Content\Category"
+                   name="msblog.content.grid"
+                   as="grid"
+                   template="MageSquare_Blog::grid.phtml"/>
+        </referenceContainer>
+
+    </body>
+</page>

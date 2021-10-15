@@ -1,0 +1,24 @@
+<?xml version="1.0"?>
+<!--
+/**
+ * @author MageSquare Team
+ * @copyright Copyright (c) 2021 MageSquare 
+ * @package MageSquare_Blog
+ */
+-->
+
+<page xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:View/Layout/etc/page_configuration.xsd">
+    <body>
+        <attribute name="class" value="customer-blog-posts"/>
+        <referenceBlock name="customer_account_navigation">
+            <block class="MageSquare\Blog\Block\Link\BlogPostsLink"
+                   name="msblog-customer-account-tab-blog-posts">
+                <arguments>
+                    <argument name="path" xsi:type="string">blogposts</argument>
+                    <argument translate="true" name="label" xsi:type="string">Blog Posts</argument>
+                    <argument name="sortOrder" xsi:type="number">42</argument>
+                </arguments>
+            </block>
+        </referenceBlock>
+    </body>
+</page>

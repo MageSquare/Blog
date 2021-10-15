@@ -1,0 +1,220 @@
+//
+//  Related items slider styles
+//  ____________________________________________
+
+//
+//  Imports
+//  --------------------------------------------
+
+@import '../_utils';
+
+//
+//  Variables
+//  --------------------------------------------
+
+@msblog-slider-arrow: #fff url('data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMTAiIGhlaWdodD0iMTgiIGZpbGw9Im5vbmUiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyI+PHBhdGggZmlsbC1ydWxlPSJldmVub2RkIiBjbGlwLXJ1bGU9ImV2ZW5vZGQiIGQ9Ik0uMTg5IDIuMDA5TDcuMTkgOS4wMS4yMzMgMTUuOTY4bDEuMTA4IDEuMTA5IDguMDQ0LTguMDQ0LTguMTEtOC4xMUwuMTg5IDIuMDA4eiIgZmlsbD0iIzU3NTg1NSIvPjwvc3ZnPg==') center no-repeat;
+@msblog-slider-arrow__size: 30px;
+@msblog-slider-dots__size: 16px;
+@msblog-slider-dots__color: #c4c4c4;
+@msblog-slider-dots__color__active: #000;
+
+//
+//  Common
+//  --------------------------------------------
+
+& when (@media-common = true) {
+    .msblog-slick-slider:not(.-am-loaded) {
+        & {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0;
+            min-height: 30px;
+        }
+
+        &:after {
+            &:extend(.msblog-loader);
+
+            display: block;
+            content: '';
+        }
+
+        & > * {
+            display: none;
+        }
+    }
+
+    .main .msblog-related-wrapper:not(.-related-products) {
+        & {
+            margin-bottom: 40px;
+        }
+
+        .msblog-related-grid {
+            margin: 0;
+            padding: 20px 10px;
+        }
+
+        .slick-list {
+            margin: 0 10px;
+            width: 100%;
+        }
+
+        .slick-list > .slick-track {
+            margin-left: 0;
+        }
+
+        .slick-slide {
+            margin: 0 7px;
+            vertical-align: top;
+        }
+    }
+
+    .msblog-related-wrapper.-related-products {
+        & {
+            margin-bottom: 40px;
+        }
+
+        .msblog-grid-list {
+            margin: 0;
+            padding: 20px;
+        }
+
+        .msblog-item-product {
+            margin: 0 10px;
+        }
+
+        .msblog-item-product .price-box {
+            margin-bottom: 5px;
+        }
+    }
+
+    .msblog-related-wrapper.-related-products .msblog-slick-slider {
+        &.slick-dotted {
+            margin-bottom: 30px;
+        }
+
+        .slick-slide {
+            vertical-align: inherit;
+        }
+
+        .msblog-item-product {
+            margin: 0;
+            padding: 0 9px;
+        }
+    }
+
+    .msblog-slick-slider.slick-slider .slick-dots {
+        & {
+            top: 100%;
+            border: none;
+            background: inherit;
+        }
+
+        > li[role='presentation'] {
+            & {
+                display: inline-flex;
+                align-items: center;
+                justify-content: center;
+                margin: 0;
+                padding: 0;
+                width: @msblog-slider-dots__size;
+                height: @msblog-slider-dots__size;
+                border: none;
+                text-align: inherit;
+                white-space: inherit;
+            }
+
+            &:hover,
+            &.selected {
+                background: inherit;
+            }
+
+            &.slick-active button {
+                background: @msblog-slider-dots__color__active;
+            }
+        }
+
+        > li[role='presentation'] button {
+            & {
+                padding: 4px;
+                width: auto;
+                height: auto;
+                border: none;
+                border-radius: 100%;
+                background: @msblog-slider-dots__color;
+            }
+
+            &:before {
+                content: none;
+            }
+        }
+    }
+
+    .msblog-slick-slider.slick-slider .slick-arrow {
+        & {
+            z-index: 2;
+            width: @msblog-slider-arrow__size;
+            height: @msblog-slider-arrow__size;
+            border-radius: 0;
+            background: @msblog-slider-arrow !important; // Slick slider already has an important directive here. Override
+        }
+
+        &:before,
+        &:after {
+            display: none;
+        }
+
+        &.slick-prev {
+            transform: rotate(180deg) translate(0, 50%);
+        }
+    }
+}
+
+//
+//  Mobile only
+//  --------------------------------------------
+
+.media-width(@extremum, @break) when (@extremum = 'max') and (@break = @screen__xs) {
+    .msblog-related-wrapper.-related-products .msblog-slick-slider.-am-loaded .msblog-item-product {
+        & {
+            display: block !important; // Override Slick js property
+            margin: 0 auto;
+            max-width: 300px;
+        }
+
+        .product-item-photo {
+            display: flex;
+            justify-content: center;
+        }
+
+        .product-item-link {
+            font-size: 20px;
+        }
+    }
+}
+
+.media-width(@extremum, @break) when (@extremum = 'max') and (@break = @screen__m) {
+    .main .msblog-related-wrapper:not(.-related-products) .slick-list {
+        margin: 0;
+    }
+}
+
+//
+//  Tablet
+//  --------------------------------------------
+
+.media-width(@extremum, @break) when (@extremum = 'min') and (@break = @screen__m) {
+    .desktop.three-columns .msblog-related-wrapper.-related-products .msblog-item-product {
+        max-width: 129px;
+    }
+
+    .msblog-related-wrapper.-related-products .msblog-slick-slider:not(.slick-initialized) {
+        & {
+            justify-content: initial;
+        }
+
+        .msblog-item-product {
+            max-width: 25%;
+        }
+    }
+}

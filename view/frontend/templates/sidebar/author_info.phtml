@@ -1,0 +1,81 @@
+<?php
+/**
+ * @author MageSquare Team
+ * @copyright Copyright (c) 2021 MageSquare 
+ * @package MageSquare_Blog
+ */
+?>
+<?php
+/** @var \MageSquare\Blog\Block\Layout\AuthorInfo $block */
+/** @var \Magento\Framework\Escaper $escaper */
+
+$author = $block->getAuthorData();
+?>
+
+<?php if ($author): ?>
+    <?php $isAnySocial = $author->getTwitterProfile() || $author->getFacebookProfile() || $author->getLinkedinProfile() ?>
+    <div id="msblog_sidebar_author" class="msblog-author-info" data-msblog-js="accordion">
+        <div class="msblog-title mobile" data-msblog-js="heading">
+            <?= $escaper->escapeHtml(__('About author')); ?>
+        </div>
+        <div class="msblog-content" data-msblog-js="content">
+            <div class="msblog-image-wrapper <?= $author->getImage() ? '' : '-placeholder' ?>">
+                <?php if ($author->getImage()): ?>
+                    <figure class="msblog-image"
+                          style="background-image: url(<?= $escaper->escapeUrl($author->getImage()); ?>)"></figure>
+                <?php endif; ?>
+            </div>
+            <h3 class="msblog-name"><?= $escaper->escapeHtml($author->getName()); ?></h3>
+
+            <?php if ($author->getJobTitle()): ?>
+                <h4 class="msblog-job"><?= $escaper->escapeHtml($author->getJobTitle()); ?></h4>
+            <?php endif; ?>
+
+            <?php if ($author->getShortDescription()): ?>
+                <p class="msblog-description"><?= $escaper->escapeHtml($author->getShortDescription()); ?></p>
+            <?php endif; ?>
+
+            <?php if ($isAnySocial): ?>
+                <ul class="msblog-list msblog-social-container">
+                    <?php if ($author->getTwitterProfile()): ?>
+                        <li class="msblog-icon -twitter">
+                            <a class="msblog-social"
+                               target="_blank"
+                               href="<?= $escaper->escapeUrl($author->getTwitterProfile()); ?>"
+                               title="<?= $escaper->escapeHtmlAttr(__('Twitter')); ?>">
+                            </a>
+                        </li>
+                    <?php endif; ?>
+                    <?php if ($author->getFacebookProfile()): ?>
+                        <li class="msblog-icon -facebook">
+                            <a class="msblog-social"
+                               target="_blank"
+                               href="<?= $escaper->escapeUrl($author->getFacebookProfile()); ?>"
+                               title="<?= $escaper->escapeHtmlAttr(__('Facebook')); ?>">
+                            </a>
+                        </li>
+                    <?php endif; ?>
+                    <?php if ($author->getLinkedinProfile()): ?>
+                        <li class="msblog-icon -linkedin">
+                            <a class="msblog-social"
+                               target="_blank"
+                               href="<?= $escaper->escapeUrl($author->getLinkedinProfile()); ?>"
+                               title="<?= $escaper->escapeHtmlAttr(__('LinkedIn')); ?>">
+                            </a>
+                        </li>
+                    <?php endif; ?>
+                </ul>
+            <?php endif; ?>
+        </div>
+    </div>
+
+    <script type="application/ld+json">
+        {
+            "@context": "https://schema.org/",
+            "@type": "Person",
+            "name": "<?= $escaper->escapeHtml($author->getName()); ?>",
+            "description": "<?= $escaper->escapeHtml($author->getShortDescription()); ?>",
+            "image": "<?= $escaper->escapeUrl($author->getImage()); ?>"
+        }
+    </script>
+<?php endif; ?>

@@ -1,0 +1,22 @@
+<?php
+/**
+ * @author MageSquare Team
+ * @copyright Copyright (c) 2021 MageSquare 
+ * @package MageSquare_Blog
+ */
+?>
+<?php
+/**
+ * @var $block \Magento\Theme\Block\Html\Topmenu
+ */
+?>
+
+<?php $columnsLimit = $block->getColumnsLimit() ?: 0; ?>
+<?php $_menu = $block->getHtml('level-top', 'submenu', $columnsLimit, []) ?>
+
+<nav class="navigation msblog-amp-navigation" data-action="navigation">
+    <amp-accordion animate  class="msblog-amp-nav0">
+        <?= /* @noEscape */ $_menu; ?>
+    </amp-accordion>
+    <?= /* @noEscape */ $block->getChildHtml(); ?>
+</nav>

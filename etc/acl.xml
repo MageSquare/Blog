@@ -1,0 +1,33 @@
+<?xml version="1.0"?>
+<!--
+/**
+ * @author MageSquare Team
+ * @copyright Copyright (c) 2021 MageSquare 
+ * @package MageSquare_Blog
+ */
+-->
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:noNamespaceSchemaLocation="urn:magento:framework:Acl/etc/acl.xsd">
+    <acl>
+        <resources>
+            <resource id="Magento_Backend::admin">
+                <resource id="Magento_Backend::content">
+                    <resource id="MageSquare_Blog::maintext" title="MageSquare Blog" />
+                    <resource id="MageSquare_Blog::authors" title="MageSquare Blog Authors Page" />
+                    <resource id="MageSquare_Blog::tags" title="MageSquare Blog Tags Page" />
+                    <resource id="MageSquare_Blog::posts" title="MageSquare Blog Posts Page" />
+                    <resource id="MageSquare_Blog::comments" title="MageSquare Blog Comments Page" />
+                    <resource id="MageSquare_Blog::categories" title="MageSquare Blog Categories Page" />
+                    <resource id="MageSquare_Blog::import" title="MageSquare Blog Import" />
+                </resource>
+                <resource id="Magento_Backend::stores">
+                    <resource id="Magento_Backend::stores_settings">
+                        <resource id="Magento_Config::config">
+                            <resource id="MageSquare_Blog::config" title="MageSquare Blog Settings" sortOrder="21215" />
+                        </resource>
+                    </resource>
+                </resource>
+            </resource>
+        </resources>
+    </acl>
+</config>

@@ -1,0 +1,17 @@
+<?xml version="1.0"?>
+<!--
+/**
+ * @author MageSquare Team
+ * @copyright Copyright (c) 2021 MageSquare 
+ * @package MageSquare_Blog
+ */
+-->
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:ObjectManager/etc/config.xsd">
+    <type name="MageSquare\Blog\Model\Import\ImportProcess">
+        <arguments>
+            <argument name="imports" xsi:type="array">
+                <item name="wordpress" xsi:type="object">MageSquare\Blog\Model\Import\WordPress</item>
+            </argument>
+        </arguments>
+    </type>
+</config>

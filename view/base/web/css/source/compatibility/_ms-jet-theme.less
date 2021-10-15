@@ -1,0 +1,40 @@
+//
+//  Compatibility with MageSquare Jet Theme
+//  ____________________________________
+
+//
+//  Common
+//  ------------------------------------
+
+& when (@media-common = true) {
+    .msblog-index-index .page-title,
+    .msblog-index-post .page-title {
+        margin: @msblog__indent__l 0;
+    }
+
+    .magesquare-jet-theme {
+        &.msblog-index-index .msblog-ref,
+        &.msblog-index-tag .msblog-ref,
+        &.msblog-index-category .msblog-ref,
+        &.msblog-index-post .msblog-ref,
+        &.msblog-index-author .msblog-ref {
+            &:extend(.alink all);
+        }
+
+        .header.links li {
+            margin-left: 15px;
+        }
+
+        .header.links > .nav.item {
+            order: -1;
+        }
+    }
+
+    .msblog-comments-wrapper a.msblog-button {
+        color: @msblog-blue__color;
+    }
+
+    .msblog-slick-slider.slick-slider .slick-dots {
+        width: 100%;
+    }
+}

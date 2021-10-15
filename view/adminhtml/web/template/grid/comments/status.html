@@ -1,0 +1,9 @@
+<!-- ko if: $row().status == 1 -->
+<span class="msblog-hidden"><span translate="'Pending'"></span></span>
+<!-- /ko -->
+<!-- ko if: $row().status == 2 -->
+<span class="msblog-published"><span translate="'Approved'"></span></span>
+<!-- /ko -->
+<!-- ko if: $row().status == 3 -->
+<span class="msblog-disabled"><span translate="'Rejected'"></span></span>
+<!-- /ko -->

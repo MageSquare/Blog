@@ -1,0 +1,163 @@
+.msblog-left-wrapper {
+    width: 31%;
+    display: inline-block;
+    margin-right: 3%;
+}
+
+.modal-slide .admin__form-field .action-close {
+    padding: 0;
+}
+
+.modal-popup .admin__form-field .action-close:before, .modal-slide .admin__form-field .action-close:before {
+    font-size: inherit;
+}
+
+.msblog-content-wrapper {
+    width: 64%;
+    display: inline-block;
+    vertical-align: top;
+}
+
+.msblog-left-wrapper .fieldset-wrapper {
+    border: 1px solid #e3e3e3;
+    padding: 0 40px;
+    background: #f8f8f8;
+    margin-bottom: 40px;
+}
+
+.msblog-options-wrapper,
+.msblog-meta-wrapper,
+.msblog-status-wrapper {
+    padding: 0 40px;
+}
+
+.msblog-left-wrapper .fieldset-wrapper-title,
+.msblog-content-wrapper .fieldset-wrapper-title {
+    padding: 30px 0 10px;
+}
+
+.msblog-left-wrapper .admin__fieldset > .admin__field > .admin__field-label,
+.msblog-content-wrapper .admin__fieldset > .admin__field > .admin__field-label {
+    float: inherit;
+    width: auto;
+    text-align: left;
+}
+
+.msblog-left-wrapper .admin__fieldset > .admin__field > .admin__field-control,
+.msblog-content-wrapper .admin__fieldset > .admin__field > .admin__field-control {
+    width: auto;
+    float: inherit;
+    padding-right: 5px;
+}
+
+.msblog-status-wrapper .admin__field {
+    display: inline-block;
+    margin: 0 30px 0 0;
+}
+
+.msblog-status-wrapper .admin__field:last-child .admin__control-text {
+    width: auto;
+}
+
+.msblog-status-wrapper .admin__fieldset > .admin__field > .admin__field-label,
+.msblog-status-wrapper .admin__fieldset > .admin__field > .admin__field-control {
+    margin-left: 0;
+}
+
+.msblog-options-wrapper .msblog-posted {
+    margin-right: 40px;
+}
+
+.msblog-options-wrapper .msblog-posted,
+.msblog-options-wrapper .msblog-comments {
+    display: inline-block;
+    vertical-align: middle;
+}
+
+.msblog-options-wrapper .msblog-posted .admin__control-multiselect{
+    min-height: 182px;
+}
+
+.msblog-options-wrapper .admin__action-multiselect-menu-inner-item._root:before {
+    top: 2rem;
+}
+
+.msblog-options-wrapper .action-menu .admin__control-checkbox + .admin__action-multiselect-label:before {
+    margin-top: 2px;
+}
+
+.msblog-content-wrapper .fieldset-wrapper .admin__fieldset {
+    padding-top: 0;
+}
+
+.msblog-content-wrapper .admin__field-label {
+    text-align: left;
+}
+
+.msblog-content-wrapper .admin__field-control .admin__field:nth-child(2) {
+    padding-left: 70px;
+}
+
+.msblog-content-wrapper .admin__field-control .admin__field-group-show-label + .msblog-list-alt {
+    padding-left: 90px;
+}
+
+.msblog-content-wrapper .admin__field-control .admin__field-group-show-label + .msblog-list-alt .admin__field-label {
+    clip: inherit !important;
+    overflow: inherit !important;
+    width: auto !important;
+}
+
+.msblog-content-wrapper .admin__field .msblog-post-alt,
+.msblog-content-wrapper .admin__field .msblog-list-alt {
+    position: relative;
+    width: 250px;
+    box-sizing: content-box;
+}
+
+.msblog-content-wrapper .admin__field .msblog-post-alt .admin__field-label,
+.msblog-content-wrapper .admin__field .msblog-list-alt .admin__field-label {
+    top: -34px;
+    width: auto;
+    margin: 0;
+}
+
+[data-index="image_group"] > .admin__field-label,
+[data-index="post_thumbnail_file"] > .admin__field-label,
+[data-index="list_thumbnail_file"] > .admin__field-label,
+[data-index="post_thumbnail_file"] .file-uploader .admin__field-note,
+[data-index="list_thumbnail_file"] .file-uploader .admin__field-note {
+    display: none;
+}
+
+.magesquare_blog-posts-edit .page-actions-buttons .msblog-preview-button {
+    position: absolute;
+    left: 133px;
+    background: #e3e3e3;
+    padding-left: 4rem;
+    padding-right: 4rem;
+}
+
+.magesquare_blog-posts-edit .page-actions-buttons .msblog-preview-button:hover,
+.magesquare_blog-posts-edit .page-actions-buttons .msblog-preview-button:focus,
+.magesquare_blog-posts-edit .page-actions-buttons .msblog-preview-button:active {
+    background: #dbdbdb;
+}
+
+.page-actions._fixed .page-actions-buttons .msblog-preview-button {
+    left: 15px;
+}
+
+.page-main-actions .page-actions._fixed .page-actions-inner:before {
+    margin-left: 190px;
+}
+
+.magesquare_blog-posts-edit .ui-datepicker.ui-widget,
+.magesquare-blog-posts-edit .ui-datepicker.ui-widget {
+    opacity: 1;
+}
+
+.msblog-create-new-action {
+    display: inline-block;
+    margin-top: 5px;
+}

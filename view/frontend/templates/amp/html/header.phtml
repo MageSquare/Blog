@@ -1,0 +1,31 @@
+<?php
+/**
+ * @author MageSquare Team
+ * @copyright Copyright (c) 2021 MageSquare 
+ * @package MageSquare_Blog
+ */
+?>
+<?php
+/**
+ * @var \MageSquare\Blog\Block\Amp\Header $block
+ */
+// @codingStandardsIgnoreFile
+
+$welcomeMessage = $block->getWelcome();
+$fullName = $block->escapeHtml($block->getCustomerFullname());
+?>
+<?php switch ($block->getShowPart()) :
+    case 'welcome': ?>
+        <li class="greet welcome welcome-msg">
+            <?php if ($fullName && $fullName !== ' ') : ?>
+                <?= $block->escapeHtml(__('Welcome, %1!', $fullName)); ?>
+            <?php else : ?>
+                <span><?= /* @noEscape */ $welcomeMessage ?></span>
+                <?= $block->getBlockHtml('header.additional') ?>
+            <?php endif; ?>
+        </li>
+    <?php break; ?>
+    <?php case 'other': ?>
+        <?= $block->getChildHtml() ?>
+    <?php break; ?>
+<?php endswitch; ?>

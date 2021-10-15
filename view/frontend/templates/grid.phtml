@@ -1,0 +1,93 @@
+<?php
+/**
+ * @author MageSquare Team
+ * @copyright Copyright (c) 2021 MageSquare 
+ * @package MageSquare_Blog
+ */
+?>
+<?php
+/**
+ * @var \MageSquare\Blog\Block\Content\AbstractBlock $block
+ * @var \Magento\Framework\Escaper $escaper
+ */
+
+$collection = $block->getCollection();
+?>
+
+<?php if ($collection && $collection->getSize()): ?>
+    <ul class="msblog-grid-list">
+        <?php foreach ($collection as $post): ?>
+            <li class="list-item msblog-item">
+                <?php if ($post->getListThumbnailSrc()): ?>
+                    <div class="msblog-wrapper">
+                        <a href="<?= $block->escapeUrl($post->getUrl()); ?>"
+                           title="<?= $block->escapeHtml($post->getTitle()); ?>">
+                            <img src="<?= $block->escapeUrl($post->getListThumbnailSrc()); ?>"
+                                 class="msblog-image"
+                                 alt="<?= $block->escapeHtml($post->getThumbnailAlt()); ?>"/>
+                        </a>
+                    </div>
+                <?php endif; ?>
+                <div class="msblog-tags">
+                    <?= $block->getTagsHtml($post); ?>
+                </div>
+                <div class="msblog-content">
+                    <h3 class="msblog-title">
+                        <a class="msblog-link"
+                           href="<?= $block->escapeUrl($post->getUrl()); ?>"
+                           title="<?= $block->escapeHtml($post->getTitle()); ?>"
+                        >
+                            <?= $block->escapeHtml($post->getTitle()); ?>
+                        </a>
+                    </h3>
+                    <div class="msblog-shot">
+                        <?= /* @noEscape */ $post->getShortContent(); ?>
+                    </div>
+                    <div class="msblog-bottom">
+                        <div class="msblog-date">
+                            <?= $block->escapeHtml($block->renderDate($post->getPublishedAt())); ?>
+                        </div>
+                        <?php if ($block->getSettingHelper()->getDisplayViews()): ?>
+                            <span
+                                class="views msblog-views"
+                                data-msblog-js="views-counter"
+                                data-post-id="<?= (int) $post->getPostId() ?>"
+                            >
+                            <?= $escaper->escapeHtml(__('%1 view(s)', $post->getViews())); ?>
+                        </span>
+                        <?php endif; ?>
+                    </div>
+                </div>
+                <div class="msblog-footer">
+                    <div class="msblog-features">
+                        <?= $block->getCategoriesHtml($post); ?>
+                        <?= $block->getAuthorHtml($post); ?>
+                        <?= $block->getShortCommentsHtml($post); ?>
+                    </div>
+                    <a class="msblog-read"
+                       href="<?= $block->escapeUrl($block->getReadMoreUrl($post)); ?>"
+                       title="<?= $block->escapeHtml(__('Read More')); ?>"
+                    >
+                        <?= $block->escapeHtml(__('Read More')); ?>
+                        <span class="msblog-arrow"></span>
+                    </a>
+                </div>
+            </li>
+        <?php endforeach; ?>
+    </ul>
+    <?= $block->getToolbarHtml(); ?>
+<?php else: ?>
+    <div class="message notice">
+        <div><?= $block->escapeHtml(__('There are no posts yet.')); ?></div>
+    </div>
+<?php endif; ?>
+
+<?php if ($collection && $collection->getSize() && $block->getSettingHelper()->getDisplayViews()): ?>
+    <script type="text/x-magento-init">
+    {
+        ".msblog-grid-list": {
+             "msBlogViewsList": {}
+        }
+    }
+    </script>
+<?php endif; ?>

@@ -1,0 +1,83 @@
+<?php
+/**
+ * @author MageSquare Team
+ * @copyright Copyright (c) 2021 MageSquare 
+ * @package MageSquare_Blog
+ */
+?>
+<?php
+/** @var  \MageSquare\Blog\Block\Sidebar\Tag $block */
+$collection = $block->getCollection();
+$cloudEnabledClass = $block->getMtEnabled() ? 'cloud-enabled' : '';
+$uniqueValue = random_int(0, 10000);
+?>
+
+<?php if (!$block->isAlreadyWrapped()): ?>
+    <div class="msblog-element-block">
+<?php endif; ?>
+
+<?php if ($block->getDisplay() && $collection && $collection->getSize()): ?>
+    <div class="msblog-tags msblog-widget-container -tags" data-msblog-js="accordion">
+        <div class="block-title msblog-title" data-msblog-js="heading">
+            <?= $block->escapeHtml(__('Tags')) ?>
+        </div>
+        <div class="block-content" data-msblog-js="content">
+            <?php if ($block->getMtEnabled()): ?>
+                <div id="msblog_canvas_container<?= (int)$uniqueValue ?>" class="noSwipe msblog-cloud-tags">
+                    <canvas class="msblog-cloud" height="<?= $block->escapeHtml($block->getMtHeight()); ?>"
+                            id="msblog_canvas<?= (int)$uniqueValue ?>">
+                        <?= $block->escapeHtml(__("Unfortunately, your browser doesn't support HTML5 canvas.")); ?>
+                    </canvas>
+                </div>
+            <?php endif; ?>
+            <div id="msblog_tags<?= (int)$uniqueValue ?>" class="tag-list <?= /* @noEscape */ $cloudEnabledClass; ?>">
+                <div class="msblog-item">
+                    <?php foreach ($collection as $tag): ?>
+                        <?php $activeClass = $block->isActive($tag) ? 'active' : ''; ?>
+                        <a href="<?= $block->escapeUrl($tag->getUrl()); ?>"
+                           class="tag msblog-tag<?= /* @noEscape */ $cloudEnabledClass; ?> <?= /* @noEscape */ $activeClass; ?>"
+                           data-weight="<?= /* @noEscape */ $block->getTagWeight($tag->getPostCount()) ?>"
+                           title="<?= $block->escapeHtml(__("%1 Topics", $tag->getPostCount())); ?>">
+                            <?= $block->escapeHtml($tag->getName()); ?>
+                        </a>
+                    <?php endforeach; ?>
+                </div>
+            </div>
+        </div>
+    <?php if ($block->getMtEnabled()): ?>
+        <script type="text/javascript">
+            //<![CDATA[
+            require(['jquery', 'MageSquare_Blog/js/tagcloud/tagcanvas.min'], function ($) {
+                $(document).ready(function () {
+                    try {
+                        var options = {
+                            weight: true,
+                            weightMode: 'both',
+                            weightFrom: 'data-weight',
+                            textHeight: 16,
+                            textColour: '<?= $block->escapeHtml($block->getMtTextColor()); ?>',
+                            outlineColour: '<?= $block->escapeHtml($block->getMtHiColor()); ?>',
+                            weightGradient: {
+                                0: '<?= $block->escapeHtml($block->getMtTextColor()); ?>',
+                                1: '<?= $block->escapeHtml($block->getMtTextColor2()); ?>'
+                            }
+                        };
+
+                        TagCanvas.Start('msblog_canvas<?= (int)$uniqueValue ?>', 'msblog_tags<?= (int)$uniqueValue ?>', options);
+                    } catch (e) {
+                        console.log(e);
+                        document.getElementById('msblog_canvas_container<?= (int)$uniqueValue ?>').style.display = 'none';
+                    }
+                })
+            });
+            //]]>
+        </script>
+    <?php endif; ?>
+    </div>
+<?php else: ?>
+    <div class="msblog-empty"><?= $block->escapeHtml(__('Tags were not found')); ?></div>
+<?php endif; ?>
+
+<?php if (!$block->isAlreadyWrapped()): ?>
+    </div>
+<?php endif; ?>

@@ -1,0 +1,25 @@
+<?php
+/**
+ * @author MageSquare Team
+ * @copyright Copyright (c) 2021 MageSquare 
+ * @package MageSquare_Blog
+ */
+?>
+<?php
+/**
+ * @var \Magento\Framework\View\Element\Template $block
+ * @var \Magento\Framework\Escaper $escaper
+ * @var \MageSquare\Blog\ViewModel\Category\Description $viewModel
+ * @var \MageSquare\Blog\ViewModel\ContentPreparation\CompositePreparator $contentPreparation
+ */
+
+$viewModel = $block->getViewModel();
+$contentPreparation = $block->getContentPreparation();
+$description = $contentPreparation->prepare($viewModel->getCategoryDescription());
+?>
+
+<?php if ($description): ?>
+    <div class="msblog-category-description">
+        <?= /* @noEscape */ $description ?>
+    </div>
+<?php endif; ?>

@@ -1,0 +1,20 @@
+<?xml version="1.0"?>
+<!--
+/**
+ * @author MageSquare Team
+ * @copyright Copyright (c) 2021 MageSquare 
+ * @package MageSquare_Blog
+ */
+-->
+
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:Module/etc/module.xsd">
+    <module name="MageSquare_Blog">
+        <sequence>
+            <module name="MageSquare_Base" />
+            <module name="Magento_Store" />
+            <module name="Magento_Backend" />
+            <module name="MageSquare_Gdpr" />
+            <module name="Magento_Setup" />
+        </sequence>
+    </module>
+</config>

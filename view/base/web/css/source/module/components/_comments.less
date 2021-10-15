@@ -1,0 +1,252 @@
+//
+//  Comments styles
+//  ____________________________________________
+
+//
+//  Imports
+//  --------------------------------------------
+
+@import '../_utils';
+
+//
+//  Variables
+//  --------------------------------------------
+
+@msblog-comment-highlight__color__classic: lighten(@msblog-svg-custom-classic__color, 35%);
+@msblog-comment-highlight__color__red: lighten(@msblog-svg-custom-red__color, 35%);
+@msblog-comment-highlight__color__green: lighten(@msblog-svg-custom-green__color, 50%);
+@msblog-comment-highlight__color__blue: lighten(@msblog-svg-custom-blue__color, 48%);
+@msblog-comment-highlight__color__grey: lighten(@msblog-svg-custom-grey__color, 23%);
+@msblog-comment-highlight__color__purple: lighten(@msblog-svg-custom-purple__color, 55%);
+
+//
+//  Common
+//  --------------------------------------------
+
+& when (@media-common = true) {
+
+    .msblog-comments-container .msblog-comment.-highlighted {
+        & {
+            outline: 5px solid @msblog-comment-highlight__color__classic;
+            background-color: @msblog-comment-highlight__color__classic;
+        }
+
+        &.-classic {
+            outline-color: @msblog-comment-highlight__color__classic;
+            background-color: @msblog-comment-highlight__color__classic;
+        }
+
+        &.-red {
+            outline-color: @msblog-comment-highlight__color__red;
+            background-color: @msblog-comment-highlight__color__red;
+        }
+
+        &.-green {
+            outline-color: @msblog-comment-highlight__color__green;
+            background-color: @msblog-comment-highlight__color__green;
+        }
+
+        &.-blue {
+            outline-color: @msblog-comment-highlight__color__blue;
+            background-color: @msblog-comment-highlight__color__blue;
+        }
+
+        &.-grey {
+            outline-color: @msblog-comment-highlight__color__grey;
+            background-color: @msblog-comment-highlight__color__grey;
+        }
+
+        &.-purple {
+            outline-color: @msblog-comment-highlight__color__purple;
+            background-color: @msblog-comment-highlight__color__purple;
+        }
+    }
+
+    .msblog-comments-container {
+        & {
+            margin: 30px 20px 0;
+        }
+
+        .msblog-comment {
+            & {
+                margin-bottom: 40px;
+            }
+
+            &:last-child {
+                margin-bottom: 0;
+            }
+        }
+    }
+
+    .msblog-comments-action .msblog-replies,
+    .msblog-comments-container .msblog-replies,
+    .msblog-replies-block:not(.-level-top) .msblog-comment-reply {
+        margin: 20px 0 0 5px;
+        padding-left: 5px;
+        border-left: 1px solid @msblog-border__color;
+    }
+
+    .msblog-comment-content {
+        & {
+            padding-left: 35px;
+        }
+
+        .msblog-author {
+            & {
+                &:extend(.msblog-author-container all);
+
+                position: relative;
+                display: inline-block;
+                margin: 0 20px 0 0;
+                padding-left: 0;
+            }
+
+            .msblog-svg.user {
+                position: absolute;
+                top: 0;
+                left: -35px;
+            }
+        }
+
+        .msblog-header {
+            margin-bottom: 15px;
+        }
+
+        .msblog-date {
+            display: inline-block;
+            margin: 0;
+            color: @msblog-date__color;
+            font-size: 14px;
+        }
+
+        .msblog-willapprove {
+            .am-word-break;
+
+            margin-top: 15px;
+            padding: 0 10px;
+            border-radius: 4px;
+            background: #fff3e0;
+            color: #f57c00;
+        }
+
+        .msblog-thesis {
+            .am-word-break;
+
+            font-style: italic;
+            font-size: 16px;
+        }
+
+        .msblog-reply {
+            display: flex;
+            align-items: center;
+            margin-top: 20px;
+        }
+
+        .msblog-button {
+            font-size: 1.2rem;
+        }
+    }
+
+    .msblog-comments-action {
+        & {
+            margin: 20px;
+            padding: 20px;
+            border: none;
+            background: @msblog__background-color;
+        }
+
+        > .msblog-comment {
+            margin-bottom: 60px;
+        }
+
+        .msblog-button.-toggle {
+            display: none;
+        }
+    }
+
+    .msblog-comment-reply {
+        & {
+            margin: 30px 0;
+        }
+
+        .msblog-button.-toggle {
+            display: none;
+        }
+    }
+
+    .msblog-form-head {
+        margin-bottom: 20px;
+        padding: 0 0 8px;
+        border-bottom: 1px solid #c8c8c8;
+        color: @msblog-date__color;
+        font-weight: 600;
+        font-size: 12px;
+        line-height: 16px;
+    }
+
+    .msblog-comments-block:not(.-loaded) .msblog-reply {
+        & {
+            opacity: .5;
+            pointer-events: none;
+            user-select: none;
+        }
+
+        .msblog-button.-toggle {
+            display: none;
+        }
+    }
+
+    .msblog-replies-block.-level-top > .msblog-comment-reply {
+        margin: 20px 0 0;
+        padding: 20px;
+        border: none;
+        background: @msblog__background-color;
+    }
+
+    .msblog-replies-block.-level-top > .msblog-replies {
+        &:not(.-active) {
+            display: none;
+        }
+
+        &:not(:empty) {
+            &:extend(.msblog-replies-block.-level-top > .msblog-comment-reply);
+        }
+    }
+
+    .msblog-reply .msblog-button.-toggle {
+        & {
+            position: relative;
+            margin-left: 31px;
+        }
+
+        &:before {
+            position: absolute;
+            right: ~'calc(100% + 15px)';
+            width: 1px;
+            height: 100%;
+            background: #c4c4c4;
+            content: '';
+        }
+    }
+}
+
+//
+//  Tablet
+//  --------------------------------------------
+
+.media-width(@extremum, @break) when (@extremum = 'min') and (@break = @screen__m) {
+    .msblog-comments-container {
+        margin: 30px 30px 0;
+    }
+
+    .msblog-comments-action {
+        margin: 20px 30px;
+    }
+
+    .msblog-comments-action .msblog-replies,
+    .msblog-comments-container .msblog-replies,
+    .msblog-replies-block:not(.-level-top) .msblog-comment-reply {
+        margin: 30px 0 0 35px;
+        padding-left: 20px;
+    }
+}

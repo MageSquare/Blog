@@ -1,0 +1,25 @@
+<?php
+/**
+ * @author MageSquare Team
+ * @copyright Copyright (c) 2021 MageSquare 
+ * @package MageSquare_Blog
+ */
+?>
+<?php /** @var \MageSquare\Blog\Block\Social $block */ ?>
+<?php if ($block->getButtonsCount()) : ?>
+    <div class="msblog-social-container" id="social">
+        <ul class="msblog-list">
+        <?php foreach ($block->getButtons() as $button) : ?>
+            <?php if ($block->getHasImage($button)) : ?>
+                <li class="msblog-icon -<?= $block->escapeHtml($button->getValue()); ?>">
+                    <a class="msblog-social"
+                       target="_blank"
+                       href="<?= $block->escapeUrl($block->getButtonUrl($button)); ?>"
+                       title="<?= $block->escapeHtml($button->getLabel()); ?>">
+                    </a>
+                </li>
+            <?php endif; ?>
+        <?php endforeach; ?>
+        </ul>
+    </div>
+<?php endif; ?>

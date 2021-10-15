@@ -1,0 +1,23 @@
+<?php
+/**
+ * @author MageSquare Team
+ * @copyright Copyright (c) 2021 MageSquare 
+ * @package MageSquare_Blog
+ */
+?>
+<script>
+    require([
+        'jquery',
+    ], function($) {
+        require([
+            'MageSquare_Blog/js/tag-it'
+        ], function() {
+            $( document ).ready(function() {
+                $("#posts_tags").tagit({
+                    availableTags: <?= \Zend_Json::encode($block->getTagsNamesArray())?>
+                });
+                $("#posts_tags").data("ui-tagit").tagInput.addClass("fancy");
+            });
+        });
+    });
+</script>

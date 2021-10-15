@@ -1,0 +1,32 @@
+<?php
+/**
+ * @author MageSquare Team
+ * @copyright Copyright (c) 2021 MageSquare 
+ * @package MageSquare_Blog
+ */
+?>
+<?php
+/** @var \MageSquare\Blog\Block\Sidebar\Search $block */
+
+$url = str_replace(['https:', 'http:'], '', $block->getSearchUrl());
+?>
+
+<div class="msblog-search-wrap">
+    <form id="mp_blog_content_search"
+          action="<?= $block->escapeUrl($url) ?>"
+          method="GET"
+          target="_top">
+        <input type="text"
+               placeholder="<?= $block->escapeHtml($block->getBlockHeader()); ?>"
+               title="<?= $block->escapeHtml($block->getBlockHeader()); ?>"
+               id="search-blog"
+               name="query"
+               value="<?= $block->escapeHtml($block->getQuery()); ?>"
+               maxlength="100"
+               class="msblog-amp-input"/>
+
+        <button class="msblog-amp-action" title="<?= $block->escapeHtml(__("Search")); ?>" type="submit">
+            <?= $block->escapeHtml(__("Search")); ?>
+        </button>
+    </form>
+</div>

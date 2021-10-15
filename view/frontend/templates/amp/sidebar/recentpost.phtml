@@ -1,0 +1,48 @@
+<?php
+/**
+ * @author MageSquare Team
+ * @copyright Copyright (c) 2021 MageSquare 
+ * @package MageSquare_Blog
+ */
+?>
+<?php
+/** @var \MageSquare\Blog\Block\Sidebar\Recentpost $block */
+
+$collection = $block->getCollection();
+?>
+
+<?php if ($block->getDisplay() && count($collection)): ?>
+    <div class="msblog-recentposts sidebar-item">
+        <div class="msblog-amp-title">
+            <?= $block->escapeHtml($block->getBlockHeader()); ?>
+        </div>
+        <?php foreach ($collection as $post): ?>
+            <?php $activeClass = $post->getIsActive() ? '-active' : ''; ?>
+            <div class="item msblog-recent-post <?= /* @noEscape */ $activeClass ?>">
+                <?php if ($block->hasThumbnail($post) && $block->showImages()): ?>
+                    <a class="msblog-img"
+                       href="<?= $block->escapeUrl($post->getUrl()); ?>"
+                       title="<?= $block->escapeHtml($post->getTitle()); ?>">
+                        <amp-img src="<?= $block->escapeUrl($block->getThumbnailSrc($post)); ?>"
+                                 alt="<?= $block->escapeHtml($post->getThumbnailAlt()); ?>"
+                                 layout="fill">
+                        </amp-img>
+                    </a>
+                <?php endif; ?>
+                <a href="<?= $block->escapeUrl($post->getUrl()); ?>">
+                    <?= $block->escapeHtml($post->getTitle()); ?>
+                </a>
+                <?php if ($block->needShowDate()): ?>
+                    <div class="msblog-sidebar-date">
+                        <?= /* @noEscape */ $block->renderDate($post->getCreatedAt()); ?>
+                    </div>
+                <?php endif; ?>
+                <?php if ($block->needShowThesis()): ?>
+                    <div class="msblog-post-thesis">
+                        <?= /* @noEscape */ $block->getStrippedContent($post->getShortContent()); ?>
+                    </div>
+                <?php endif; ?>
+            </div>
+        <?php endforeach; ?>
+    </div>
+<?php endif; ?>

@@ -1,0 +1,70 @@
+<?php
+/**
+ * @author MageSquare Team
+ * @copyright Copyright (c) 2021 MageSquare 
+ * @package MageSquare_Blog
+ */
+?>
+<?php
+/** @var \MageSquare\Blog\Block\Content\Post $block */
+/** @var \Magento\Framework\Escaper $escaper */
+
+$post = $block->getPost();
+?>
+
+<div class="msblog-container">
+    <?php if ($post->getPostThumbnailSrc()): ?>
+        <div class="amp-img-container">
+            <?php if ($block->hasThumbnailUrl()): ?>
+                <a class="thumbnail-url"
+                   title="<?= $escaper->escapeHtml($post->getTitle()); ?>"
+                   href="<?= $escaper->escapeUrl($block->getThumbnailUrl()); ?>">
+            <?php endif; ?>
+                    <amp-img alt="<?= $escaper->escapeHtml($post->getThumbnailAlt('post')); ?>"
+                             src="<?= $escaper->escapeUrl($post->getPostImageSrc()); ?>"
+                             layout="fill">
+                    </amp-img>
+            <?php if ($block->hasThumbnailUrl()): ?>
+                </a>
+            <?php endif; ?>
+        </div>
+    <?php endif; ?>
+
+    <div class="am-header">
+        <?= $block->getAmpHeaderHtml($post); ?>
+    </div>
+
+    <div class="am-content">
+        <?= /* @noEscape */ $post->getAmpPostContent(); ?>
+    </div>
+
+    <div class="am-details fix-me">
+        <div class="msblog-post-tags">
+            <div class="msblog-categories">
+                <?= $block->getCategoriesHtml($post, true); ?>
+            </div>
+            <div class="msblog-tags">
+                <?= $block->getTagsHtml($post, true); ?>
+            </div>
+        </div>
+    </div>
+
+    <?= $block->getChildHtml('msblog.post.related');?>
+
+    <?php if ($post->getCommentsEnabled() || $block->getSettingHelper()->getSocialEnabled()): ?>
+        <div class="customer-action-bar">
+            <?php if ($block->getSettingHelper()->getSocialEnabled()): ?>
+                <?= $block->getSocialHtml(); ?>
+            <?php endif; ?>
+            <?php if ($post->getCommentsEnabled()): ?>
+                <?= $block->getChildHtml('msblog.comments.form'); ?>
+            <?php endif; ?>
+        </div>
+    <?php endif; ?>
+
+    <?php if ($post->getCommentsEnabled()): ?>
+        <div class="msblog-comments-container" id="comments">
+            <?= $block->getChildHtml('msblog.comments.list'); ?>
+        </div>
+    <?php endif; ?>
+</div>

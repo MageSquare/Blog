@@ -1,0 +1,21 @@
+<?php
+/**
+ * @author MageSquare Team
+ * @copyright Copyright (c) 2021 MageSquare 
+ * @package MageSquare_Blog
+ */
+?>
+<?php
+/** @var \MageSquare\Blog\Block\Comments $block */
+
+$collection = $block->getCollection();
+?>
+
+<div class="msblog-comments-livestream">
+    <?php if ($collection && $collection->getSize()) : ?>
+        <div class="msblog-amp-title -comment"><?= $block->escapeHtml(__('Comments')); ?></div>
+        <?php foreach ($collection as $message) : ?>
+            <?= $block->getMessageHtml($message); ?>
+        <?php endforeach; ?>
+    <?php endif; ?>
+</div>

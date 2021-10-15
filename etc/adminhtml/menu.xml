@@ -1,0 +1,69 @@
+<?xml version="1.0"?>
+<!--
+/**
+ * @author MageSquare Team
+ * @copyright Copyright (c) 2021 MageSquare 
+ * @package MageSquare_Blog
+ */
+-->
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Backend:etc/menu.xsd">
+    <menu>
+        <add id="MageSquare_Blog::maintext"
+             title="MageSquare Blog Pro"
+             module="MageSquare_Blog"
+             sortOrder="110"
+             parent="Magento_Backend::content"
+             resource="MageSquare_Blog::maintext"/>
+
+        <add id="MageSquare_Blog::posts"
+             title="Posts"
+             module="MageSquare_Blog"
+             sortOrder="110"
+             parent="MageSquare_Blog::maintext"
+             action="magesquare_blog/posts"
+             resource="MageSquare_Blog::posts"/>
+
+        <add id="MageSquare_Blog::categories"
+             title="Categories"
+             module="MageSquare_Blog"
+             sortOrder="120"
+             parent="MageSquare_Blog::maintext"
+             action="magesquare_blog/categories"
+             resource="MageSquare_Blog::categories"/>
+        <add id="MageSquare_Blog::authors"
+             title="Authors"
+             module="MageSquare_Blog"
+             sortOrder="130"
+             parent="MageSquare_Blog::maintext"
+             action="magesquare_blog/authors"
+             resource="MageSquare_Blog::authors"/>
+        <add id="MageSquare_Blog::tags"
+             title="Tags"
+             module="MageSquare_Blog"
+             sortOrder="140"
+             parent="MageSquare_Blog::maintext"
+             action="magesquare_blog/tags"
+             resource="MageSquare_Blog::tags"/>
+        <add id="MageSquare_Blog::comments"
+             title="Comments"
+             module="MageSquare_Blog"
+             sortOrder="150"
+             parent="MageSquare_Blog::maintext"
+             action="magesquare_blog/comments"
+             resource="MageSquare_Blog::comments"/>
+        <add id="MageSquare_Blog::cms_widget_instance"
+             title="Add Blog Blocks via Widget"
+             module="MageSquare_Blog"
+             sortOrder="160"
+             parent="MageSquare_Blog::maintext"
+             action="adminhtml/widget_instance"
+             resource="Magento_Widget::widget_instance"/>
+        <add id="MageSquare_Blog::import"
+             title="Import"
+             module="MageSquare_Blog"
+             sortOrder="170"
+             parent="MageSquare_Blog::maintext"
+             action="magesquare_blog/import"
+             resource="MageSquare_Blog::import"/>
+    </menu>
+</config>

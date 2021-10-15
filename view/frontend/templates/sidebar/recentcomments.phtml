@@ -1,0 +1,54 @@
+<?php
+/**
+ * @author MageSquare Team
+ * @copyright Copyright (c) 2021 MageSquare 
+ * @package MageSquare_Blog
+ */
+?>
+<?php
+/** @var  \MageSquare\Blog\Block\Sidebar\Recentcomments $block */
+$collection = $block->getCommentsCollection();
+?>
+<?php if (!$block->isAlreadyWrapped()): ?>
+    <div class="msblog-element-block">
+<?php endif; ?>
+
+<?php if ($block->getDisplay() && count($collection)): ?>
+    <div data-msblog-js="accordion" class="msblog-widget-container -comments">
+        <div class="msblog-title" data-msblog-js="heading">
+            <?= $block->escapeHtml($block->getBlockHeader()); ?>
+        </div>
+        <ul class="msblog-list" data-msblog-js="content">
+        <?php foreach ($collection as $comment): ?>
+            <li class="msblog-item -comment msblog-recent-comment-<?= $block->escapeHtml((int)$comment->getId()); ?>">
+                <a class="msblog-headline" href="<?= $block->escapeUrl($comment->getUrl()); ?>">
+                    <?= $block->escapeHtml($comment->getPostTitle()); ?>
+                </a>
+                <?php if ($block->needShowDate()): ?>
+                <div class="msblog-date -comment">
+                    <?= $block->escapeHtml($block->renderDate($comment->getCreatedAt())); ?>
+                </div>
+                <?php endif; ?>
+                <?php if ($block->needShowThesis()): ?>
+                <div class="msblog-comment">
+                    <?= $block->escapeHtml($block->getStrippedContent($comment->getMessage())); ?>
+                </div>
+                <?php endif; ?>
+                <div class="msblog-author">
+                    <svg class="msblog-svg user <?= $block->escapeHtml($block->getColorClass()); ?>">
+                        <use xlink:href="<?= $block->escapeUrl($block->getViewFileUrl('MageSquare_Blog::images/sprite.svg')); ?>#user"></use>
+                    </svg>
+                    <?= $block->escapeHtml($comment->getName() ?: __('Guest')); ?>
+                </div>
+            </li>
+        <?php endforeach; ?>
+        </ul>
+    </div>
+<?php else: ?>
+    <div class="msblog-empty"><?= $block->escapeHtml(__('Comments were not found')); ?></div>
+<?php endif; ?>
+
+<?php if (!$block->isAlreadyWrapped()): ?>
+    </div>
+<?php endif; ?>
+

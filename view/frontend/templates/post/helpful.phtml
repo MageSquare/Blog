@@ -1,0 +1,33 @@
+<?php
+/**
+ * @author MageSquare Team
+ * @copyright Copyright (c) 2021 MageSquare 
+ * @package MageSquare_Blog
+ */
+?>
+<?php
+/** @var \MageSquare\Blog\Block\Content\Post\Helpful $block */
+$postId = (int) $block->getPost()->getId();
+?>
+<div class="msblog-helpful-wrap" data-helpful-js="post-helpful-<?= /* @noEscape */ $postId ?>">
+    <span class="msblog-helpful">
+        <?= $block->escapeHtml(__('Did you like this post?')) ?>
+    </span>
+    <div class="msblog-options">
+        <div class="msblog-plus">
+            <span class="msblog-icon"></span>
+            <span class="msblog-count">0</span>
+        </div>
+        <div class="msblog-minus">
+            <span class="msblog-icon"></span>
+            <span class="msblog-count">0</span>
+        </div>
+    </div>
+</div>
+<script type="text/x-magento-init">
+    {
+        "[data-helpful-js=\"post-helpful-<?= /* @noEscape */ $postId ?>\"]": {
+            "MageSquare_Blog/js/amPostVote": <?= /* @noEscape */ $block->getJsonConfig() ?>
+        }
+    }
+</script>

@@ -1,0 +1,23 @@
+<?php
+/**
+ * @author MageSquare Team
+ * @copyright Copyright (c) 2021 MageSquare 
+ * @package MageSquare_Blog
+ */
+?>
+<?php
+/** @var \MageSquare\Blog\Block\Sidebar\Category $block */
+
+$treeHtml = $block->renderCategoriesTreeHtml();
+?>
+
+<?php if ($block->getDisplay() && $treeHtml) : ?>
+    <div class="msblog-categories sidebar-item">
+        <div class="msblog-amp-title">
+            <?= $block->escapeHtml($block->getBlockHeader()); ?>
+        </div>
+        <ul class="categories item level-<?= /* @noEscape */ $block->getDefaultLevel(); ?>">
+            <?= /* @noEscape */ $treeHtml; ?>
+        </ul>
+    </div>
+<?php endif; ?>

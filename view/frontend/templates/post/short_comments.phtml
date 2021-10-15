@@ -1,0 +1,33 @@
+<?php
+/**
+ * @author MageSquare Team
+ * @copyright Copyright (c) 2021 MageSquare 
+ * @package MageSquare_Blog
+ */
+?>
+<?php
+
+/** @var \MageSquare\Blog\Block\Content\Post\Details $block */
+
+$post = $block->getPost();
+?>
+
+<?php if ($post->getUseCommentsGlobal() && $post->getCommentsEnabled()): ?>
+    <div class="msblog-wrap" data-msblog-js="short_comments">
+        <svg class="msblog-svg comment <?= $block->escapeHtml($block->getColorClass()); ?>">
+            <use xlink:href="<?= $block->escapeUrl($block->getViewFileUrl('MageSquare_Blog::images/sprite.svg')); ?>#comment"></use>
+        </svg>
+        <div class="comments msblog-item -comments">
+            <?php $commentCount = $block->getCommentsCount(); ?>
+            <a class="msblog-ref" href="<?= $block->escapeUrl($block->getCommentsUrl()); ?>">
+                <?php if ($commentCount == 1): ?>
+                    <?= $block->escapeHtml(__("%1 comment", $commentCount)); ?>
+                <?php elseif ($commentCount > 1): ?>
+                    <?= $block->escapeHtml(__("%1 comments", $commentCount)); ?>
+                <?php else: ?>
+                    <?= $block->escapeHtml(__("No comments")); ?>
+                <?php endif; ?>
+            </a>
+        </div>
+    </div>
+<?php endif; ?>

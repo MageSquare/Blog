@@ -1,0 +1,125 @@
+<?php
+/**
+ * @author MageSquare Team
+ * @copyright Copyright (c) 2021 MageSquare 
+ * @package MageSquare_Blog
+ */
+?>
+<?php
+/** @var \Magento\Framework\View\Element\Template $block */
+/** @var \Magento\Framework\Escaper $escaper */
+/** @var Account $viewModel */
+
+use MageSquare\Blog\ViewModel\Posts\Account;
+
+$viewModel = $block->getViewModel();
+?>
+
+<div class="tabs-wrap">
+    <ul class="msblog-tabs-block -title" data-mage-init='{"msBlogTabs":{}}' data-msblog-js="tabs">
+        <?php if ($viewModel->isLikeEnabled()): ?>
+            <li class="msblog-item -active"
+                data-msblog-js="tab-label"
+                data-tab-title="#<?= /* @noEscape */ Account::LIKED_PAGE_VAR_NAME ?>"
+                data-tab-id="1">
+                <?= $escaper->escapeHtml(__('Posts I Liked')) ?>
+            </li>
+        <?php endif; ?>
+        <?php if ($viewModel->isCommentEnabled()): ?>
+            <li class="msblog-item <?= (!$viewModel->isLikeEnabled()) ? '-active' : '' ?>"
+                data-msblog-js="tab-label"
+                data-tab-title="#<?= /* @noEscape */ Account::COMMENTS_PAGE_VAR_NAME ?>"
+                data-tab-id="2">
+                <?= $escaper->escapeHtml(__('Posts I Commented')) ?>
+            </li>
+        <?php endif; ?>
+    </ul>
+</div>
+
+<div data-msblog-js="content-tabs-block">
+    <?php if ($viewModel->isLikeEnabled()): ?>
+        <section class="msblog-content-tab -active"
+             data-msblog-js="content-tab"
+             data-tab-id="1">
+        <?php $likeCollection = $viewModel->getLikedCollection() ?: [] ?>
+        <?php if ($likeCollection && $likeCollection->getSize()): ?>
+            <?php foreach ($likeCollection as $like): ?>
+                <?php $post = $viewModel->getPost($like);?>
+                <div class="msblog-post-block">
+                    <?php $imageSrc = $post->getListThumbnailSrc(); ?>
+
+                    <a href="<?= $escaper->escapeUrl($post->getUrl()); ?>"
+                       class="msblog-image-wrapper <?= $escaper->escapeHtmlAttr($imageSrc ? '' : '-placeholder') ?>"
+                       title="<?= $escaper->escapeHtmlAttr($post->getTitle()); ?>">
+                        <?php if ($imageSrc): ?>
+                            <figure class="msblog-image"
+                                    title="<?= $escaper->escapeHtmlAttr($post->getThumbnailAlt()); ?>"
+                                    style="background-image: url(<?= $escaper->escapeUrl($imageSrc); ?>)"></figure>
+                        <?php endif; ?>
+                    </a>
+                    <div class="msblog-content">
+                        <a href="<?= $escaper->escapeUrl($post->getUrl()); ?>"
+                           class="msblog-headline"
+                           title="<?= $escaper->escapeHtmlAttr($post->getTitle()); ?>">
+                            <?= $escaper->escapeHtml($post->getTitle()); ?>
+                        </a>
+                    </div>
+                </div>
+            <?php endforeach; ?>
+            <?= $viewModel->getLikedToolbar()->toHtml(); ?>
+        <?php else: ?>
+            <div class="msblog-notify-message">
+                <span>
+                    <?= $escaper->escapeHtml(__('There are no posts you liked. To read our Blog, please, click')) ?>
+                    <a href="<?= $escaper->escapeUrl($viewModel->getBlogUrl()); ?>"><?= $escaper->escapeHtml(__('here')) ?></a>
+                </span>
+            </div>
+        <?php endif; ?>
+    </section>
+    <?php endif; ?>
+    <?php if ($viewModel->isCommentEnabled()): ?>
+        <section class="msblog-content-tab <?= (!$viewModel->isLikeEnabled()) ? '-active' : '' ?>"
+             data-msblog-js="content-tab"
+             data-tab-id="2">
+        <?php $commentsCollection = $viewModel->getCommentsCollection() ?: [] ?>
+        <?php if ($commentsCollection && $commentsCollection->getSize()): ?>
+            <?php foreach ($commentsCollection as $comment): ?>
+                <?php $post = $comment->getPost();?>
+                <div class="msblog-post-block">
+                    <?php $imageSrc = $post->getListThumbnailSrc(); ?>
+
+                    <a href="<?= $escaper->escapeUrl($post->getUrl()); ?>#ms-blog-comment-<?= (int)$comment->getId() ?>"
+                       class="msblog-image-wrapper <?= $escaper->escapeHtmlAttr($imageSrc ? '' : '-placeholder') ?>"
+                       title="<?= $escaper->escapeHtml($post->getTitle()); ?>">
+                        <?php if ($imageSrc): ?>
+                            <figure class="msblog-image"
+                                    title="<?= $escaper->escapeHtmlAttr($post->getThumbnailAlt()); ?>"
+                                    style="background-image: url(<?= $escaper->escapeUrl($imageSrc); ?>)"></figure>
+                        <?php endif; ?>
+                    </a>
+                    <div class="msblog-content">
+                        <a href="<?= $escaper->escapeUrl($post->getUrl()); ?>#ms-blog-comment-<?= (int)$comment->getId() ?>"
+                           class="msblog-headline"
+                           title="<?= $escaper->escapeHtmlAttr($post->getTitle()); ?>">
+                            <?= $escaper->escapeHtml($post->getTitle()); ?>
+                        </a>
+                        <?php if ($comment->getUpdatedAt()): ?>
+                            <div class="msblog-date">
+                                <?=  $escaper->escapeHtml($viewModel->renderDate($comment->getUpdatedAt())); ?>
+                            </div>
+                        <?php endif; ?>
+                    </div>
+                </div>
+            <?php endforeach; ?>
+            <?= $viewModel->getComentsToolbar()->toHtml(); ?>
+        <?php else: ?>
+            <div class="msblog-notify-message">
+                <span>
+                    <?= $escaper->escapeHtml(__('There are no posts you commented. To read our Blog, please, click')) ?>
+                    <a href="<?= $escaper->escapeUrl($viewModel->getBlogUrl()); ?>"><?= $escaper->escapeHtml(__('here')) ?></a>
+                </span>
+            </div>
+        <?php endif; ?>
+    </section>
+    <?php endif; ?>
+</div>

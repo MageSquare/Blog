@@ -1,0 +1,1799 @@
+//
+//  Base Styles
+//  ____________________________________________
+
+//
+//  Imports
+//  --------------------------------------------
+
+@import '_utils';
+
+//
+//  Common
+//  ----------------------------------------------
+
+& when (@media-common = true) {
+    //Admin
+    .msblog-disabled {
+        color: red
+    }
+
+    .msblog_views_label,
+    .msblog_likes_label,
+    .msblog_dislikes_label {
+        font-weight: 600;
+        line-height: 3.2rem;
+    }
+
+    .msblog-hidden {
+        color: grey
+    }
+
+    .msblog-published {
+        color: green
+    }
+
+    .msblog-scheduled {
+        color: grey
+    }
+
+    .pagebuilder-content-type .msblog_widget .msblog-widget-placeholder {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        min-height: 300px;
+        background-color: @msblog__background-color;
+    }
+
+    #msblog_canvas_container {
+        max-width: 400px;
+        max-height: 400px;
+    }
+
+    //Front
+    .tag-list.cloud-enabled .msblog-item {
+        display: none;
+    }
+
+    .msblog-post-list .block-title strong {
+        font-weight: 600;
+    }
+
+    .msblog-preloader {
+        position: absolute;
+        top: 0;
+        right: 0;
+        bottom: 0;
+        left: 0;
+        z-index: 10;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        background: rgba(255, 255, 255, .6);
+    }
+
+    .msblog-loader {
+        margin: auto;
+        width: 16px;
+        height: 11px;
+        background: url('../MageSquare_Blog/images/ajax-loader.gif') no-repeat scroll 50% 0 transparent;
+    }
+
+    .word-wrap {
+        word-break: break-word;
+        word-wrap: break-word;
+        overflow-wrap: anywhere;
+    }
+
+    .msblog-index-index .page-title,
+    .msblog-index-post .page-title {
+        margin-bottom: 0;
+        padding-right: 50px;
+        font-size: 40px;
+        .word-wrap();
+    }
+
+    .mobile {
+        & {
+            display: none;
+        }
+
+        .mobile-block {
+            display: none;
+        }
+    }
+
+    .mobile.two-columns-right .content,
+    .mobile.two-columns-left .content {
+        position: relative;
+    }
+
+    .msblog-main-content {
+        & {
+            padding-top: 40px;
+        }
+
+        > .msblog-item {
+            & {
+                margin-bottom: 30px;
+            }
+
+            &:last-child {
+                margin-bottom: 0;
+            }
+        }
+
+        .msblog-btn {
+            height: auto;
+        }
+    }
+
+    .msblog-aside-right,
+    .msblog-aside-left {
+        & {
+            position: fixed;
+            top: 0;
+            z-index: 1000;
+            display: none;
+            overflow-y: scroll;
+            padding-top: 20px;
+            width: 300px;
+            height: ~'calc(100% - 20px)';
+            background: #fff;
+            box-shadow: 0 4px 8px rgba(0, 98, 176, .1);
+        }
+
+        &.active {
+            display: block;
+        }
+
+        .msblog-close {
+            & {
+                position: relative;
+                width: 15px;
+                height: 15px;
+                margin: 0 0 25px 15px;
+            }
+
+            &:before,
+            &:after {
+                content: '';
+                position: absolute;
+                top: 0;
+                left: 0;
+                width: 2px;
+                height: 13px;
+                .lib-css(background, @msblog-gray__color);
+            }
+
+            &:before {
+                transform: rotate(45deg);
+            }
+
+            &:after {
+                transform: rotate(-45deg);
+            }
+        }
+    }
+
+    .msblog-aside-right {
+        right: 0;
+    }
+
+    .msblog-aside-left {
+        left: 0;
+    }
+
+    .msblog-overlay {
+        position: fixed;
+        z-index: 999;
+        top: 0;
+        bottom: 0;
+        right: 0;
+        left: 0;
+        display: none;
+        width: 100%;
+        height: 100%;
+        background: rgba(60, 60, 60, .3);
+    }
+
+    .msblog-index-index .msblog-ref,
+    .msblog-index-tag .msblog-ref,
+    .msblog-index-category .msblog-ref,
+    .msblog-index-post .msblog-ref,
+    .msblog-index-author .msblog-ref {
+        & {
+            font-size: 14px;
+            font-weight: 600;
+            .lib-css(color, @msblog-blue__color);
+        }
+
+        &:hover {
+            .lib-css(color, @msblog-blue__color);
+        }
+    }
+
+    .msblog-cloud-tags {
+        & {
+            width: auto;
+        }
+
+        .msblog-cloud {
+            width: 100%;
+        }
+    }
+
+    .msblog-author-container {
+        line-height: 25px;
+        font-size: 14px;
+        .lib-css(color, @msblog-gray__color);
+        .word-wrap();
+    }
+
+    .msblog-wrap {
+        .lib-vendor-prefix-display(flex);
+    }
+
+    .msblog-svg {
+        & {
+            position: relative;
+            top: 7px;
+            min-width: 25px;
+            margin-right: 10px;
+        }
+
+        &.user {
+            width: 25px;
+            height: 25px;
+        }
+
+        &.comment {
+            top: 6px;
+            width: 25px;
+            height: 24px;
+        }
+
+        &.print {
+            width: 21px;
+            min-width: auto;
+            height: 24px;
+        }
+
+        &.-classic {
+            .lib-css(fill, @msblog-svg-custom-classic__color);
+        }
+
+        &.-red {
+            .lib-css(fill, @msblog-svg-custom-red__color);
+        }
+
+        &.-green {
+            .lib-css(fill, @msblog-svg-custom-green__color);
+        }
+
+        &.-blue {
+            .lib-css(fill, @msblog-svg-custom-blue__color);
+        }
+
+        &.-grey {
+            .lib-css(fill, @msblog-svg-custom-grey__color);
+        }
+
+        &.-purple {
+            .lib-css(fill, @msblog-svg-custom-purple__color);
+        }
+    }
+
+    .msblog-swipe.-left,
+    .msblog-swipe.-right {
+        position: absolute;
+        top: -45px;
+        right: 0;
+        width: 50px;
+        height: 50px;
+        border-radius: 50%;
+        cursor: pointer;
+        transition: all .5s .3s ease-in-out;
+        .lib-css(background, @msblog-swipe__background-image);
+        box-shadow: 0 4px 8px rgba(0, 98, 176, .2);
+    }
+
+    .msblog-post-container {
+        & {
+            padding-bottom: 15px;
+            margin-bottom: 30px;
+            .lib-css(border, 1px solid @msblog-border__color);
+            border-radius: 4px;
+        }
+
+        &:last-child {
+            margin-bottom: 0;
+        }
+
+        .msblog-tags {
+            margin: 20px 0;
+            padding: 0 15px;
+        }
+
+        .msblog-tag {
+            & {
+                display: inline-block;
+                margin: 0 10px 5px 0;
+                padding: 3px 8px;
+                border-radius: 3px;
+                color: #fff;
+                font-size: 14px;
+                font-weight: 600;
+                .lib-css(background, @msblog-tag__color);
+                .word-wrap();
+            }
+
+            &:last-child {
+                margin-right: 0;
+            }
+
+            &:hover {
+                text-decoration: none;
+            }
+        }
+
+        .msblog-title {
+            margin: 0 0 20px;
+            font-size: 24px;
+            .lib-css(color, @msblog-gray__color);
+            font-weight: 600;
+            .word-wrap();
+        }
+
+        .msblog-image {
+            border-radius: 4px;
+        }
+
+        .msblog-content {
+            margin-top: 15px;
+            padding: 0 15px 15px;
+        }
+
+        .msblog-widget-container {
+            margin: 20px -15px;
+        }
+
+        .msblog-headline {
+            & {
+                .lib-css(color, @msblog-gray__color);
+            }
+
+            &:hover {
+                .lib-css(color, @msblog-blue__color);
+            }
+        }
+
+        .msblog-shot {
+            margin: 15px 0;
+            font-size: 16px;
+            .lib-css(color, @msblog-gray__color);
+        }
+
+        .msblog-shot > p,
+        .msblog-content > p {
+            .word-wrap();
+        }
+
+        .msblog-bottom {
+            .lib-vendor-prefix-display(flex);
+            .lib-vendor-box-align(baseline);
+            margin-top: 20px;
+        }
+
+        .msblog-date {
+            margin-right: 15px;
+            font-size: 14px;
+            .lib-css(color, @msblog-date__color);
+        }
+
+        .msblog-views {
+            font-size: 14px;
+            .lib-css(color, @msblog-date__color);
+            white-space: nowrap;
+        }
+
+        .msblog-footer {
+            padding: 15px 15px 20px;
+        }
+
+        .msblog-features {
+            & {
+                .lib-vendor-prefix-display(flex);
+                .lib-vendor-prefix-flex-wrap(wrap);
+            }
+
+            &.-post {
+                padding: 15px 15px 20px;
+            }
+        }
+
+        .msblog-item.-author,
+        .msblog-item.-comments {
+            &:extend(.msblog-author-container all);
+        }
+
+        .msblog-item {
+            margin: 5px 31px 5px 0;
+        }
+
+        .msblog-item.-print {
+            &:extend(.msblog-author-container all);
+
+            & {
+                margin: 0 0 0 auto;
+                white-space: nowrap;
+            }
+        }
+
+        .msblog-category {
+            margin: 5px 30px 5px 0;
+            line-height: 25px;
+            font-size: 14px;
+            .lib-css(color, @msblog-gray__color);
+            .word-wrap();
+        }
+
+        .msblog-item.-author-posts {
+            margin: 5px 30px 5px 0;
+            line-height: 25px;
+            font-size: 14px;
+            .lib-css(color, @msblog-gray__color);
+            .word-wrap();
+        }
+
+        .msblog-read {
+            display: block;
+            width: 100%;
+            margin-top: 20px;
+            padding: 9px 0;
+            border-radius: 3px;
+            text-align: center;
+            color: #fff;
+            font-size: 16px;
+            font-weight: bold;
+            .lib-css(background, @msblog-blue__color);
+        }
+
+        .msblog-arrow {
+            display: inline-block;
+            width: 16px;
+            height: 12px;
+            margin-left: 10px;
+            .lib-css(background, @msblog-arrow-mobile__background-image);
+        }
+    }
+
+    .msblog-recent-post {
+        & {
+            display: flex;
+        }
+
+        .msblog-recent-post-image-wrapper {
+            margin-right: 5%;
+            vertical-align: top;
+            min-width: 20%;
+        }
+    }
+
+    .msblog-element-block {
+        & {
+            display: block;
+            .lib-css(border-bottom, 1px solid @msblog-border__color);
+        }
+
+        .msblog-btn {
+            height: auto;
+        }
+
+        .msblog-list {
+            margin: 0;
+            padding: 0;
+            list-style: none;
+        }
+
+        .msblog-empty {
+            padding: 20px;
+        }
+
+        .msblog-title {
+            & {
+                position: relative;
+                padding: 20px 20px;
+                font-size: 14px;
+                font-weight: bold;
+                text-transform: uppercase;
+                .lib-css(color, @msblog-blue__color);
+            }
+
+            &:before,
+            &:after {
+                content: '';
+                position: absolute;
+                top: 30px;
+                height: 2px;
+                width: 10px;
+                .lib-css(background, @msblog-blue__color);
+            }
+
+            &:before {
+                right: 26px;
+                transform: rotate(45deg);
+            }
+
+            &:after {
+                right: 20px;
+                transform: rotate(-45deg);
+            }
+        }
+
+        .msblog-title.active {
+            & {
+                .lib-css(border-bottom, 1px solid @msblog-border__color);
+            }
+
+            &:before {
+                transform: rotate(-45deg);
+            }
+
+            &:after {
+                transform: rotate(45deg);
+            }
+        }
+
+        .msblog-item {
+            & {
+                margin-bottom: 0;
+                padding: 15px 25px;
+                .lib-css(border-bottom, 1px solid @msblog-border__color);
+            }
+
+            &:last-child {
+                border-bottom: none;
+            }
+
+            &.-search {
+                padding: 20px 20px;
+            }
+
+            &.-comment:hover {
+                background: #f1f8ff;
+            }
+        }
+
+        .msblog-headline {
+            & {
+                display: block;
+                font-size: 16px;
+                font-weight: 600;
+                .lib-css(color, @msblog-gray__color);
+                .word-wrap();
+            }
+
+            &:hover {
+                .lib-css(color, @msblog-blue__color);
+            }
+        }
+
+        .msblog-date {
+            margin: 0;
+            font-size: 14px;
+            .lib-css(color, @msblog-date__color);
+        }
+
+        .msblog-date.-post {
+            margin-top: 5px;
+        }
+
+        .msblog-date.-comment {
+            margin: 10px 0;
+        }
+
+        .msblog-thesis {
+            & {
+                margin: 5px 0;
+                .word-wrap();
+            }
+
+            &:last-child {
+                margin-bottom: 0;
+            }
+        }
+
+        .msblog-comment {
+            margin: 10px 0;
+            font-style: italic;
+            font-size: 16px;
+            .word-wrap();
+        }
+
+        .msblog-author {
+            &:extend(.msblog-author-container all);
+
+            & {
+                .lib-vendor-prefix-display(flex);
+                .lib-vendor-box-align(baseline);
+                margin-top: 5px;
+            }
+        }
+
+        .msblog-tag {
+            &:extend(.msblog-post-container .msblog-tag all);
+        }
+    }
+
+    .sidebar-main .msblog-element-block .msblog-title:before,
+    .sidebar-main .msblog-element-block .msblog-title:after {
+        display: none;
+    }
+
+    .msblog-element-block .msblog-categories {
+        & {
+            margin: 0;
+            padding: 0;
+            list-style: none;
+        }
+
+        &.-level1 .msblog-categories {
+            padding-left: 20px;
+        }
+
+        & .msblog-link {
+            &:extend(.msblog-element-block .msblog-headline all);
+
+            & {
+                font-weight: normal;
+            }
+        }
+
+        &.-level1 > .msblog-category > .msblog-link {
+            font-weight: 600;
+        }
+
+        &.-level3 .msblog-link {
+            font-size: 14px;
+        }
+
+        &.-level1 > .msblog-category {
+            &:extend(.msblog-element-block .msblog-item all);
+        }
+
+        &.-level2 .msblog-category {
+            margin: 10px 0 0;
+        }
+
+        &.-level3 .msblog-category {
+            margin-top: 5px;
+        }
+    }
+
+    .msblog-form-search {
+        .msblog-field {
+            & {
+                position: relative;
+                margin-bottom: 10px;
+            }
+
+            &:before {
+                content: '';
+                position: absolute;
+                top: 12px;
+                left: 10px;
+                width: 16px;
+                height: 16px;
+                .lib-css(background, @msblog-loupe-icon__background-image);
+            }
+        }
+
+        .msblog-input-wrapper {
+            display: inline-block;
+            width: 100%;
+        }
+
+        .msblog-input {
+            & {
+                width: 100%;
+                height: 100%;
+                padding: 9px 10px 9px 36px;
+                border-radius: 3px;
+                font-size: 14px;
+                .lib-css(border, 1px solid @msblog-border__color);
+                background: #f9f9f9;
+                .lib-css(color, @msblog-input-text__color);
+            }
+
+            &::-webkit-input-placeholder {
+                .lib-css(color, @msblog-input-text__color);
+            }
+
+            &::-moz-placeholder {
+                .lib-css(color, @msblog-input-text__color);
+            }
+
+            &:-ms-input-placeholder {
+                .lib-css(color, @msblog-input-text__color);
+            }
+
+            &:focus {
+                & {
+                    border: 1px solid #499bf8;
+                    background: #f1f8ff;
+                    box-shadow: none;
+                }
+
+                &:focus::-webkit-input-placeholder {
+                    color: transparent
+                }
+
+                &:focus::-moz-placeholder {
+                    color: transparent
+                }
+
+
+                &:focus:-ms-input-placeholder {
+                    color: transparent
+                }
+            }
+        }
+
+        .msblog-btn {
+            & {
+                width: 100%;
+                padding: 12px 0;
+                border: none;
+                border-radius: 3px;
+                font-size: 16px;
+                font-weight: bold;
+                color: #fff;
+                box-shadow: none;
+                .lib-css(background, @msblog-blue__color);
+            }
+
+            &:hover {
+                .lib-css(background, @msblog-link__hover__color);
+            }
+        }
+    }
+
+    .msblog-main-content .msblog-search {
+        &:extend(.msblog-post-container);
+
+        & {
+            box-shadow: 0 4px 8px rgba(0, 98, 176, .1);
+        }
+
+        .msblog-item {
+            padding: 20px 15px;
+        }
+
+        .msblog-title {
+            &:extend(.msblog-element-block .msblog-title );
+
+            & {
+                padding: 15px 15px;
+                .lib-css(border-bottom, 1px solid @msblog-border__color);
+            }
+        }
+    }
+
+    .msblog-grid-list {
+        & {
+            padding: 0;
+            list-style: none;
+        }
+
+        > .msblog-item,
+        .slick-slide .msblog-item {
+            &:extend(.msblog-post-container all);
+
+            & {
+                width: 100%;
+            }
+        }
+
+        .msblog-item.-comments {
+            white-space: nowrap;
+        }
+
+        .image {
+            border-radius: 4px;
+        }
+    }
+
+    .msblog-social-container,
+    .msblog-element-block[data-set="sidebar-author"],
+    .msblog-item[data-set="content-author"] {
+        & {
+            padding: 15px 15px 0;
+        }
+
+        .msblog-list {
+            .lib-vendor-prefix-display(flex);
+            .lib-vendor-prefix-flex-wrap(wrap);
+            margin: 0;
+            padding: 0;
+            list-style: none;
+        }
+
+        .msblog-social {
+            display: block;
+            width: 25px;
+            height: 25px;
+        }
+
+        .msblog-icon {
+            width: 25px;
+            height: 25px;
+            margin: 0 15px 5px 0;
+            border-radius: 50%;
+            .lib-css(background-color, @msblog-social-icon__background-color);
+            background-position: center;
+            background-repeat: no-repeat;
+            cursor: pointer;
+        }
+
+        .msblog-icon:hover {
+            .lib-css(background-color, @msblog-social-icon__hover__background-color);
+        }
+
+        .msblog-icon.-twitter {
+            .lib-css(background-image, @msblog-social-twitter__background-image);
+        }
+
+        .msblog-icon.-facebook {
+            .lib-css(background-image, @msblog-social-facebook__background-image);
+        }
+
+        .msblog-icon.-vkontakte {
+            .lib-css(background-image, @msblog-social-vkontakte__background-image);
+        }
+
+        .msblog-icon.-digg {
+            .lib-css(background-image, @msblog-social-digg__background-image);
+        }
+
+        .msblog-icon.-pinterest {
+            .lib-css(background-image, @msblog-social-pinterest__background-image);
+        }
+
+        .msblog-icon.-blogger {
+            .lib-css(background-image, @msblog-social-blogger__background-image);
+        }
+
+        .msblog-icon.-linkedin {
+            .lib-css(background-image, @msblog-social-linkedin__background-image);
+        }
+
+        .msblog-icon.-tumblr {
+            .lib-css(background-image, @msblog-social-tumblr__background-image);
+        }
+
+        .msblog-icon.-reddit {
+            .lib-css(background-image, @msblog-social-reddit__background-image);
+        }
+
+        .msblog-icon.-slashdot {
+            .lib-css(background-image, @msblog-social-slashdot__background-image);
+        }
+
+        .msblog-icon.-stumbleupon {
+            .lib-css(background-image, @msblog-social-stumbleupon__background-image);
+        }
+
+        .msblog-icon.-odnoklassniki {
+            .lib-css(background-image, @msblog-social-odnoklassniki__background-image);
+        }
+
+        .msblog-icon.-google {
+            .lib-css(background-image, @msblog-social-google__background-image);
+        }
+
+        .msblog-icon.-whatsapp {
+            background-image: @msblog-social-whatsapp__background-image;
+            background-size: 15px;
+        }
+    }
+
+    .msblog-pager-container {
+        & {
+            margin: 20px auto 50px;
+        }
+
+        .msblog-links {
+            .lib-vendor-prefix-display(flex);
+            -webkit-box-pack: justify;
+            -ms-flex-pack: justify;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .msblog-link {
+            & {
+                position: relative;
+                display: block;
+                width: 35px;
+                height: 35px;
+                border-radius: 50%;
+                .lib-css(background, @msblog-blue__color);
+            }
+
+            &:before,
+            &:after {
+                content: '';
+                position: absolute;
+                width: 12px;
+                height: 2px;
+                background: #fff;
+            }
+
+            &:before {
+                top: 13px;
+                left: 13px;
+                transform: rotate(45deg);
+            }
+
+            &:after {
+                top: 20px;
+                left: 13px;
+                transform: rotate(-45deg);
+            }
+
+            &:hover {
+                .lib-css(background, @msblog-link__hover__color);
+            }
+        }
+
+        .msblog-link.-new:before {
+            left: 10px;
+            transform: rotate(-45deg);
+        }
+
+        .msblog-link.-new:after {
+            left: 10px;
+            transform: rotate(45deg);
+        }
+
+        .msblog-link.-disabled {
+            cursor: auto;
+            pointer-events: none;
+            background: #c4c4c4;
+        }
+
+        .msblog-pagination {
+            font-size: 16px;
+            .lib-css(color, @msblog-gray__color);
+        }
+    }
+
+    .msblog-comments-wrapper,
+    .msblog-related-wrapper {
+        & {
+            margin-bottom: 31px;
+            .lib-css(border, 1px solid @msblog-border__color);
+            border-radius: 4px;
+        }
+
+        > .msblog-title {
+            position: relative;
+            padding: 20px 20px;
+            .lib-css(border-bottom, 1px solid @msblog-border__color);
+            font-size: 14px;
+            font-weight: bold;
+            text-transform: uppercase;
+            .lib-css(color, @msblog-blue__color);
+        }
+    }
+
+    .msblog-form-comment {
+        & {
+            position: relative;
+            .lib-vendor-prefix-display(flex);
+            .lib-vendor-prefix-flex-direction (column);
+        }
+
+        .msblog-svg.comment {
+            position: absolute;
+            top: -40px;
+            left: 0;
+        }
+
+        .msblog-fieldset {
+            margin: 0;
+            padding: 0;
+            border: none;
+            min-inline-size: initial;
+        }
+
+        .msblog-customer {
+            .lib-vendor-prefix-display(flex);
+            .lib-vendor-prefix-flex-direction (column);
+        }
+
+        .msblog-customer.-hidden {
+            display: none;
+        }
+
+        .msblog-wrapper {
+            margin-bottom: 15px;
+        }
+
+        .msblog-input {
+            &:extend(.msblog-form-search .msblog-input all);
+
+            & {
+                padding-left: 15px;
+                background-color: #fff;
+            }
+
+            &.-name,
+            &.-email {
+                max-height: 40px;
+            }
+        }
+
+        .msblog-input.-textarea {
+            margin-bottom: 0;
+            height: 100px;
+        }
+
+        .msblog-gdprtext {
+            position: relative;
+            margin-top: 15px;
+        }
+
+        .msblog-gdprtext .msblog-label {
+            .word-wrap();
+            word-wrap: anywhere;
+        }
+
+        .msblog-input.-gdpr {
+            position: relative;
+            top: 2px;
+            width: auto;
+            height: 13px;
+        }
+
+        .mage-error {
+            margin-bottom: 0;
+        }
+
+        .msblog-btn {
+            &:extend(.msblog-form-search .msblog-btn);
+
+            & {
+                margin-top: 15px;
+            }
+        }
+    }
+
+    .msblog-widget-container {
+        .msblog-list {
+            padding-left: 40px;
+        }
+    }
+
+    .msblog-element-block .msblog-widget-container {
+        &.-post .msblog-list,
+        &.-comments .msblog-list,
+        &.-categories .msblog-list {
+            padding-left: 0;
+        }
+    }
+
+    .msblog-post-container .msblog-widget-container {
+        &:extend(.msblog-element-block all);
+
+        & {
+            padding-bottom: 25px;
+            border: none;
+            background: #f7fbff;
+        }
+
+        .msblog-title {
+            & {
+                padding: 25px 20px 0;
+                border-bottom: none;
+            }
+
+            &:before,
+            &:after {
+                content: none;
+            }
+        }
+
+        .msblog-list {
+            margin: 0 20px 0;
+            .lib-css(border, 1px solid @msblog-border__color);
+            border-radius: 4px;
+            background: #fff;
+        }
+
+        .msblog-item {
+            margin: 0;
+        }
+    }
+
+    .msblog-post-container .msblog-widget-container.-post {
+        & {
+            padding-bottom: 10px;
+        }
+
+        .msblog-list {
+            border: none;
+            background: inherit;
+        }
+
+        .msblog-item {
+            &:extend(.msblog-post-container .msblog-widget-container .msblog-list);
+
+            & {
+                margin: 0 0 15px;
+            }
+        }
+    }
+
+    .msblog-post-container .msblog-widget-container.-tags {
+        & {
+            padding: 0 20px 15px;
+        }
+
+        .msblog-title {
+            margin-bottom: 15px;
+            padding: 25px 0 0;
+        }
+
+        .msblog-tag {
+            margin-bottom: 10px;
+        }
+
+        .msblog-item {
+            padding: 0;
+        }
+
+        .msblog-cloud-tags {
+            width: 200px;
+            margin: 0 auto;
+        }
+    }
+
+    .msblog-post-container .msblog-widget-container.-categories {
+        .msblog-category {
+            margin-right: 0;
+        }
+    }
+
+    .msblog-helpful-wrap {
+        & {
+            padding: 15px 25px 0;
+            text-align: left;
+        }
+
+        > .msblog-helpful {
+            font-size: 14px;
+            .lib-css(color, @msblog-helpful-text__color);
+            vertical-align: top;
+        }
+
+        > .msblog-options {
+            margin-left: 5px;
+        }
+
+        > .msblog-options,
+        .msblog-plus,
+        .msblog-minus,
+        .msblog-icon {
+            display: inline-block;
+            cursor: pointer;
+        }
+
+        .msblog-icon {
+            margin: 0 5px 0 10px;
+            width: 20px;
+            height: 18px;
+            .lib-css(transition, all .3 ease, 1);
+        }
+
+        .msblog-plus > .msblog-icon {
+            .lib-css(background, @msblog-like__background);
+        }
+
+        .msblog-plus:hover > .msblog-icon {
+            .lib-css(background, @msblog-like__hover__background);
+        }
+
+        .msblog-plus.-voted > .msblog-icon {
+            .lib-css(background, @msblog-like__active__background);
+        }
+
+        .msblog-minus > .msblog-icon {
+            .lib-css(background, @msblog-dislike__background);
+        }
+
+        .msblog-minus:hover > .msblog-icon {
+            .lib-css(background, @msblog-dislike__hover__background);
+        }
+
+        .msblog-minus.-voted > .msblog-icon {
+            .lib-css(background, @msblog-dislike__active__background);
+        }
+    }
+
+    .msblog-container-list .msblog-author-description {
+        margin-bottom: 60px;
+    }
+
+    .msblog-category-description {
+        margin-bottom: 20px;
+    }
+
+    // Styles for post slider
+    .msblog-post-list {
+        & {
+            margin-top: 30px;
+        }
+
+        .slick-track {
+            display: flex;
+        }
+
+        .slick-slide {
+            margin: 0 10px;
+            text-align: center;
+        }
+
+        .post-item-details {
+            .am-word-break;
+
+            margin-top: 10px;
+        }
+    }
+
+    .msblog-element-block[data-set="sidebar-author"] {
+        .author_image {
+            width: 150px;
+            height: 150px;
+            border-radius: 50%;
+            display: block;
+            margin-left: auto;
+            margin-right: auto;
+            margin-top: 5px;
+        }
+
+        .title {
+            font-weight: bold;
+            text-align: center;
+            font-size: large;
+        }
+    }
+
+    .msblog-notify-message {
+        .lib-message-icon-inner(notice);
+    }
+
+    // Related posts
+    .msblog-relatedposts-wrap {
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: space-between;
+    }
+
+    .msblog-related-post {
+        & {
+            display: flex;
+            margin-bottom: 35px;
+            width: 49%;
+        }
+
+        .msblog-link {
+            display: block;
+        }
+
+        .msblog-image-wrapper {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            overflow: hidden;
+            box-sizing: border-box;
+            margin-right: 20px;
+            min-width: @msblog-post-image__size;
+            width: @msblog-post-image__size;
+            height: @msblog-post-image__size;
+            background: @msblog-image-wrapper__background-color center/50px no-repeat;
+        }
+
+        .msblog-image-wrapper.-placeholder {
+            background-image: @msblog-post-image__background-image;
+        }
+
+        .msblog-image {
+            display: block;
+            width: 100%;
+            height: 100%;
+            background-position: center;
+            background-size: cover;
+            background-repeat: no-repeat;
+        }
+
+        .msblog-headline {
+            & {
+                display: block;
+                color: #212121;
+                font-weight: 600;
+                font-size: 18px;
+                line-height: 20px;
+            }
+
+            &:hover,
+            &:focus {
+                color: #0e6bd7;
+                text-decoration: none;
+            }
+        }
+
+        .msblog-content {
+            .am-word-break;
+        }
+
+        .msblog-text {
+            margin: 15px 0 0;
+        }
+
+        .msblog-date {
+            display: block;
+            margin-top: 15px;
+            color: #707070;
+            font-weight: 300;
+            font-size: 14px;
+            line-height: 19px;
+        }
+    }
+}
+
+//
+//  Mobile
+//  --------------------------------------------
+
+.media-width(@extremum, @break) when (@extremum = 'max') and (@break = @screen__m) {
+    .mobile {
+        display: block;
+
+        .mobile-block {
+            display: block;
+        }
+    }
+
+    .desktop {
+        display: none;
+
+        .desktop-block {
+            display: none;
+        }
+    }
+
+    .msblog-element-block .msblog-title {
+        &:before,
+        &:after {
+            display: none;
+        }
+    }
+
+    .msblog-relatedposts-wrap {
+        display: block;
+    }
+
+    .msblog-related-post {
+        margin-bottom: 20px;
+        width: 100%;
+    }
+}
+
+//
+//  Tablet
+//  --------------------------------------------
+
+.media-width(@extremum, @break) when (@extremum = 'min') and (@break = @screen__m) {
+    .msblog-index-index .page-title,
+    .msblog-index-post .page-title {
+        margin-bottom: 40px
+    }
+
+    .desktop.three-columns {
+        & {
+            .lib-vendor-prefix-display(flex);
+        }
+    }
+
+    .desktop.three-columns section.content {
+        width: 52%;
+        padding: 0 30px;
+    }
+
+    .desktop.three-columns {
+        aside.left,
+        aside.right {
+            width: 24%;
+        }
+    }
+
+    .desktop.two-columns-right,
+    .desktop.two-columns-left {
+        .lib-vendor-prefix-display(flex);
+    }
+
+    .desktop.two-columns-right section.content {
+        width: 76%;
+        padding-right: 40px;
+    }
+
+    .desktop.two-columns-left section.content {
+        width: 76%;
+        padding-left: 40px;
+    }
+
+    .desktop.two-columns-right,
+    .desktop.two-columns-left {
+        aside.left,
+        aside.right {
+            width: 24%;
+        }
+    }
+
+    .msblog-container-list {
+        padding-top: 0;
+    }
+
+    .msblog-element-block {
+        & {
+            display: block;
+            margin-bottom: 30px;
+            .lib-css(border, 1px solid @msblog-border__color);
+            border-radius: 4px;
+            box-shadow: 0 4px 8px rgba(0, 98, 176, .1);
+        }
+
+        .msblog-title {
+            & {
+                padding: 15px 15px;
+            }
+
+            &:before,
+            &:after {
+                display: none;
+            }
+        }
+
+        .msblog-item {
+            padding: 15px 20px;
+        }
+
+        .msblog-item.-search {
+            padding: 20px 15px;
+        }
+    }
+
+    .msblog-post-container {
+        & {
+            padding-bottom: 15px;
+            margin-bottom: 40px;
+        }
+
+        .msblog-tags {
+            margin: 25px 0;
+            padding: 0 25px;
+        }
+
+        .msblog-content {
+            margin-top: 20px;
+            padding: 0 25px 15px;
+        }
+
+        .msblog-widget-container {
+            margin: 30px -25px;
+        }
+
+        .msblog-title {
+            margin-bottom: 20px;
+        }
+
+        .msblog-footer {
+            .lib-vendor-prefix-display(flex);
+            -webkit-box-pack: justify;
+            -ms-flex-pack: justify;
+            justify-content: space-between;
+            align-items: center;
+            padding: 15px 25px;
+        }
+
+        .msblog-features.-post {
+            padding: 15px 25px;
+        }
+
+        .msblog-more {
+            min-width: 41%;
+            text-align: right;
+        }
+
+        .msblog-read {
+            display: inline-block;
+            width: auto;
+            margin: 0;
+            padding: 0;
+            .lib-css(color, @msblog-blue__color);
+            background: none;
+        }
+
+        .msblog-arrow {
+            .lib-css(background, @msblog-arrow-desktop__background-image);
+        }
+    }
+
+    .msblog-main-content .msblog-search {
+        .msblog-item {
+            padding: 30px 25px;
+        }
+
+        .msblog-title {
+            &:extend(.msblog-element-block .msblog-title );
+
+            & {
+                padding: 20px 20px;
+                .lib-css(border-bottom, 1px solid @msblog-border__color);
+            }
+        }
+
+        .msblog-form-container {
+            .lib-vendor-prefix-display(flex);
+        }
+
+        .msblog-field {
+            width: 100%;
+            margin-bottom: 0;
+        }
+
+        .msblog-btn {
+            max-width: 250px;
+            max-height: 40px;
+            margin-left: 15px;
+        }
+    }
+
+    .msblog-main-content {
+        & {
+            padding-top: 0;
+        }
+
+        > .msblog-item {
+            & {
+                margin-bottom: 50px;
+            }
+
+            &:last-child {
+                margin-bottom: 0;
+            }
+        }
+    }
+
+    .msblog-grid-list {
+        & {
+            .lib-vendor-prefix-display(flex);
+            .lib-vendor-prefix-flex-wrap(wrap);
+            .lib-vendor-box-align(flex-start);
+            -webkit-box-pack: justify;
+            -ms-flex-pack: justify;
+            justify-content: space-between;
+        }
+
+        > .msblog-item {
+            width: 47%;
+        }
+
+        .msblog-read:hover {
+            text-decoration: none;
+            .lib-css(background, @msblog-link__hover__color);
+        }
+
+        .msblog-features > .msblog-item {
+            margin-right: 10px;
+        }
+
+        .msblog-features > .msblog-item.-comments .msblog-ref {
+            white-space: nowrap;
+        }
+
+        .msblog-item .msblog-category {
+            margin-right: 10px;
+        }
+    }
+
+    .msblog-social-container {
+        padding: 15px 25px 0;
+    }
+
+    .msblog-pager-container {
+        width: 290px;
+        margin: 40px auto 50px;
+    }
+
+    .msblog-comments-wrapper,
+    .msblog-related-wrapper {
+        & {
+            margin-bottom: 0;
+        }
+
+        > .msblog-title {
+            padding: 20px 30px;
+        }
+    }
+
+    .msblog-form-comment {
+        & {
+            max-width: 480px;
+        }
+
+        .msblog-svg.comment {
+            top: 10px;
+        }
+
+        .msblog-customer {
+            .lib-vendor-prefix-flex-direction (row);
+        }
+
+        .msblog-wrapper {
+            & {
+                width: 49%;
+            }
+
+            &:first-child {
+                margin: 0 20px 15px 0;
+            }
+        }
+
+        .msblog-input {
+            &:extend(.msblog-form-search .msblog-input);
+
+            & {
+                padding-left: 15px;
+            }
+        }
+
+        .msblog-input.-email + .mage-error,
+        .msblog-input.-name + .mage-error {
+            margin-bottom: 0;
+        }
+
+        .msblog-btn {
+            & {
+                width: 230px;
+                padding: 14px 0;
+            }
+
+            &:hover {
+                background: @msblog-link__hover__color;
+            }
+        }
+    }
+
+    .msblog-post-container .msblog-widget-container {
+        .msblog-title {
+            padding: 25px 30px 0;
+        }
+
+        .msblog-list {
+            margin: 0 30px 0;
+        }
+    }
+
+    .msblog-post-container .msblog-widget-container.-post {
+        .msblog-list {
+            .lib-vendor-prefix-display(flex);
+            .lib-vendor-prefix-flex-wrap(wrap);
+            -webkit-box-pack: justify;
+            -ms-flex-pack: justify;
+            justify-content: space-between;
+        }
+
+        .msblog-item {
+            width: 47%;
+            box-sizing: border-box;
+        }
+    }
+
+    .desktop.one-column .msblog-post-container .msblog-content .msblog-widget-container.-post {
+        .msblog-list {
+            -webkit-box-pack: inherit;
+            -ms-flex-pack: inherit;
+            justify-content: inherit;
+        }
+
+        .msblog-item {
+            & {
+                width: 31%;
+                margin: 0 20px 20px 0;
+            }
+
+            &:nth-child(3n) {
+                margin-right: 0;
+            }
+        }
+    }
+
+    .msblog-post-container .msblog-widget-container.-tags {
+        padding: 0 30px 15px;
+    }
+}
+
+.media-width(@extremum, @break) when (@extremum = 'min') and (@break = @screen__l) {
+    .msblog-index-index .page-title,
+    .msblog-index-post .page-title {
+        margin-bottom: 60px
+    }
+
+    .desktop.three-columns {
+        aside.left,
+        aside.right {
+            max-width: 271px;
+            width: 24%;
+        }
+    }
+
+    .desktop.three-columns section.content {
+        width: 52%;
+    }
+
+    .desktop.two-columns-right,
+    .desktop.two-columns-left {
+        aside.right {
+            max-width: 271px;
+            width: 30%;
+        }
+    }
+
+    .msblog-post-container {
+        .msblog-more {
+            min-width: 30%;
+        }
+    }
+
+    .msblog-form-comment .msblog-wrapper {
+        width: 230px;
+    }
+
+    .msblog-grid-list {
+        & {
+            -webkit-box-pack: initial;
+            -ms-flex-pack: initial;
+            justify-content: initial;
+        }
+
+        > .msblog-item {
+            width: 31%;
+            min-width: 190px;
+            margin-right: 3%;
+        }
+
+        .slick-slide .msblog-item {
+            width: 31%;
+            min-width: 150px;
+            margin-right: 3%;
+        }
+
+        > .msblog-item:nth-child(3n+0),
+        .slick-slide .msblog-item:nth-child(3n+0) {
+            margin-right: 0;
+        }
+    }
+
+    .msblog-post-container .msblog-widget-container.-post .msblog-item {
+        width: 48%;
+    }
+
+    .msblog-helpful-wrap {
+        top: 0;
+        right: 0;
+        margin: 0;
+    }
+}

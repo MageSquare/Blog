@@ -1,0 +1,41 @@
+<?xml version="1.0"?>
+<!--
+/**
+ * @author MageSquare Team
+ * @copyright Copyright (c) 2021 MageSquare 
+ * @package MageSquare_Blog
+ */
+-->
+<page xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" layout="" xsi:noNamespaceSchemaLocation="urn:magento:framework:View/Layout/etc/page_configuration.xsd">
+    <update handle="msblog_amp_default"/>
+
+    <body>
+        <referenceBlock name="blog.page">
+            <referenceContainer name="layout.content">
+                <block class="MageSquare\Blog\Block\Content\Post" name="post" template="MageSquare_Blog::amp/post.phtml">
+                    <block class="MageSquare\Blog\Block\Social"
+                           name="msblog_social"
+                           as="msblog_social"
+                           template="MageSquare_Blog::amp/social.phtml"/>
+
+                    <block class="MageSquare\Blog\Block\Content\Post\Related"
+                           name="msblog.post.related"
+                           template="MageSquare_Blog::amp/post/related.phtml"/>
+
+                    <block class="MageSquare\Blog\Block\Comments\Form"
+                           name="msblog.comments.form"
+                           template="MageSquare_Blog::amp/comments/form.phtml"/>
+
+                    <block class="MageSquare\Blog\Block\Comments"
+                           name="msblog.comments.list"
+                           as="msblog.comments.list"
+                           template="MageSquare_Blog::amp/comments/list.phtml">
+                        <block class="MageSquare\Blog\Block\Comments\Message"
+                               name="msblog_comments_message"
+                               template="MageSquare_Blog::amp/comments/list/message.phtml"/>
+                    </block>
+                </block>
+            </referenceContainer>
+        </referenceBlock>
+    </body>
+</page>

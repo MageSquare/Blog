@@ -1,0 +1,112 @@
+<?php
+/**
+ * @author MageSquare Team
+ * @copyright Copyright (c) 2021 MageSquare 
+ * @package MageSquare_Blog
+ */
+?>
+<?php
+/** @var $block \MageSquare\Blog\Block\Comments\Form */
+/** @var \Magento\Framework\Escaper $escaper */
+?>
+
+<?php if ($block->canPost() && (!$block->isLoggedIn() || $block->isAjaxRendering())): ?>
+    <?php if ($block->canUserPost()): ?>
+        <div class="msblog-form-head" data-msblog-js="form-head">
+            <?= $escaper->escapeHtml(__('Leave your comment')); ?>
+        </div>
+        <form class="msblog-form-comment"
+              data-msblog-js="form"
+              id="msblog-form-<?= $escaper->escapeHtmlAttr($block->getPostId()); ?>">
+            <fieldset class="msblog-fieldset">
+                <div class="msblog-customer">
+                    <?php if ($block->isAskName()): ?>
+                    <div class="msblog-wrapper">
+                        <input type="text"
+                               name="name"
+                               placeholder="<?= $escaper->escapeHtmlAttr(__('Your name')); ?>"
+                               id="name_field"
+                               class="required-entry msblog-input -name"
+                               value="<?= $escaper->escapeHtmlAttr($block->getCustomerName()) ?>" />
+                    </div>
+                    <?php endif; ?>
+                    <?php if ($block->isAskEmail()): ?>
+                    <div class="msblog-wrapper">
+                            <input type="text"
+                                   name="email"
+                                   id="email_field"
+                                   placeholder="<?= $escaper->escapeHtmlAttr(__("Your e-mail")); ?>"
+                                   class="required-entry validate-email msblog-input -email"
+                                   value="<?= $escaper->escapeHtmlAttr($block->getCustomerEmail()); ?>" />
+                    </div>
+                        <?php if ($block->isLoggedIn()): ?>
+                            <input type="hidden"
+                                   name="customer_id"
+                                   value="<?= $escaper->escapeHtmlAttr($block->getCustomerId()); ?>" />
+                        <?php endif; ?>
+                    <?php endif; ?>
+                </div>
+                <textarea name="message"
+                          class="required-entry msblog-input -textarea"
+                          id="message_field"
+                          rows="3"
+                          placeholder="<?= $escaper->escapeHtmlAttr($block->isReply()
+                              ? __('Text your reply...')
+                              : __('Text your comment...')); ?>"
+                          ></textarea>
+                <?php if ($block->isGdprEnabled()): ?>
+                <?php $randId = random_int(0, 10000); ?>
+                    <div class="msblog-gdprtext">
+                        <input type="checkbox"
+                               name="gdpr_agree"
+                               data-msblog-js="gdpr-agree"
+                               class="required-entry msblog-input -gdpr"
+                               id="gdpr-agree<?= $escaper->escapeHtmlAttr($randId) ?>">
+                        <label class="msblog-label" for="gdpr-agree<?= $escaper->escapeHtmlAttr($randId); ?>">
+                            <?= /* @noEscape */ $block->getGdprText(); ?>
+                        </label>
+                    </div>
+                <?php endif; ?>
+                <?php $gdprCheckboxesHtml = $block->getGdprCheckboxHtml(); ?>
+                <?php if (!empty($gdprCheckboxesHtml)): ?>
+                    <?= /** @noEscape */ $gdprCheckboxesHtml ?>
+                <?php endif; ?>
+                <input type="hidden"
+                       name="secure_code"
+                       value="<?= $escaper->escapeHtmlAttr($block->getSecureCode()); ?>" />
+                <input type="hidden"
+                       name="reply_to"
+                       value="<?= $escaper->escapeHtmlAttr($block->getReplyTo()); ?>" />
+                <input type="hidden"
+                       name="session_id"
+                       value="<?= $escaper->escapeHtmlAttr($block->getSessionId()); ?>" />
+                <button class="msblog-btn"
+                        id="msblog_submit_comment"
+                        type="submit"
+                        title="<?= $escaper->escapeHtmlAttr(__('Post comment')); ?>">
+                    <?= $escaper->escapeHtml(__('Post comment')); ?>
+                </button>
+            </fieldset>
+        </form>
+    <?php else: ?>
+        <div class="msblog-guest-comment">
+            <p>
+                <?= $escaper->escapeHtml(__('Please ')); ?>
+                <a class="msblog-ref"
+                   href="<?= $escaper->escapeUrl($block->getLoginUrl()); ?>"
+                   title="<?= $escaper->escapeHtmlAttr(__('login')); ?>">
+                    <?= $escaper->escapeHtml(__('login')); ?>
+                </a>
+                <?= $escaper->escapeHtml(($block->isReply() ? __(' to reply.') : __(' to comment.'))); ?>
+            </p>
+            <p><?= $escaper->escapeHtml(__('Don\'t have an account?')); ?></p>
+            <a class="msblog-ref"
+               href="<?= $escaper->escapeUrl($block->getRegisterUrl()); ?>"
+               title="<?= $escaper->escapeHtmlAttr(__('Sign Up for free')); ?>">
+                <?= $escaper->escapeHtml(__('Sign Up for free')); ?>
+            </a>
+        </div>
+    <?php endif; ?>
+<?php else: ?>
+    <p><?= $escaper->escapeHtml(__('New comments for this post are not allowed')); ?></p>
+<?php endif; ?>

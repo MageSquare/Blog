@@ -1,0 +1,65 @@
+<?php
+/**
+ * @author MageSquare Team
+ * @copyright Copyright (c) 2021 MageSquare 
+ * @package MageSquare_Blog
+ */
+?>
+<?php
+/** @var \MageSquare\Blog\Block\Sidebar\Recentpost $block */
+$collection = $block->getCollection();
+?>
+<?php if (!$block->isAlreadyWrapped()): ?>
+    <div class="msblog-element-block">
+<?php endif; ?>
+
+<?php if ($block->getDisplay() && count($collection)): ?>
+    <div data-msblog-js="accordion" class="msblog-widget-container -post">
+        <div class="msblog-title" data-msblog-js="heading">
+            <?= $block->escapeHtml($block->getBlockHeader()); ?>
+        </div>
+        <ul class="msblog-list" data-msblog-js="content">
+            <?php foreach ($collection as $post): ?>
+                <?php $activeClass = $post->getIsActive() ? 'active' : ''; ?>
+                <li class="msblog-item
+                           msblog-recent-post
+                           <?= /* @noEscape */ $activeClass; ?>
+                           msblog-recent-post-<?= (int)$post->getId(); ?>"
+                >
+                    <?php if ($block->hasThumbnail($post) && $block->showImages() && ($src = $block->getThumbnailSrc($post))): ?>
+                        <div class="msblog-recent-post-image-wrapper">
+                            <a class="thumbnail"
+                               href="<?= $block->escapeUrl($post->getUrl()); ?>"
+                               title="<?= $block->escapeHtml($post->getTitle()); ?>">
+                                <img class="img"
+                                     src="<?= $block->escapeUrl($src); ?>"
+                                     alt="<?= $block->escapeHtml($post->getThumbnailAlt()); ?>">
+                            </a>
+                        </div>
+                    <?php endif; ?>
+                    <div class="msblog-recent-post-content-wrapper">
+                        <a class="msblog-headline" href="<?= $block->escapeUrl($post->getUrl()); ?>">
+                            <?= $block->escapeHtml($post->getTitle()); ?>
+                        </a>
+                        <?php if ($block->needShowThesis()): ?>
+                            <div class="msblog-thesis">
+                                <?= $block->escapeHtml($block->getStrippedContent($post->getShortContent())); ?>
+                            </div>
+                        <?php endif; ?>
+                        <?php if ($block->needShowDate()): ?>
+                            <div class="msblog-date -post">
+                                <?= $block->escapeHtml($block->renderDate($post->getCreatedAt())); ?>
+                            </div>
+                        <?php endif; ?>
+                    </div>
+                </li>
+            <?php endforeach; ?>
+        </ul>
+    </div>
+<?php else: ?>
+    <div class="msblog-empty"><?= $block->escapeHtml(__('Posts were not found')); ?></div>
+<?php endif; ?>
+
+<?php if (!$block->isAlreadyWrapped()): ?>
+    </div>
+<?php endif; ?>

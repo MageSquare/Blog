@@ -1,0 +1,36 @@
+<?php
+/**
+ * @author MageSquare Team
+ * @copyright Copyright (c) 2021 MageSquare 
+ * @package MageSquare_Blog
+ */
+?>
+<?php
+/** @var \MageSquare\Blog\Block\Sidebar\Search $block */
+?>
+
+<?php if ($block->getDisplay()) : ?>
+    <div class="msblog-search-wrap">
+        <div class="msblog-amp-title">
+            <?= $block->escapeHtml($block->getBlockHeader()); ?>
+        </div>
+        <div class="content">
+            <form id="ms_blog_search"
+                  action="<?= $block->escapeUrl($block->getAmpSearchUrl()) ?>"
+                  method="get"
+                  target="_top">
+                <input type="text"
+                       placeholder="<?= $block->escapeHtml($block->getBlockHeader()); ?>"
+                       class="msblog-amp-input"
+                       title="<?= $block->escapeHtml($block->getBlockHeader()); ?>"
+                       id="search-blog"
+                       name="query"
+                       value="<?= $block->escapeHtml($block->getQuery()); ?>"
+                       maxlength="100"/>
+                <button class="msblog-amp-action" title="<?= $block->escapeHtml(__("Search")); ?>" type="submit">
+                    <?= $block->escapeHtml(__("Search")); ?>
+                </button>
+            </form>
+        </div>
+    </div>
+<?php endif; ?>

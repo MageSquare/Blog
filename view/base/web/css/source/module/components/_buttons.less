@@ -1,0 +1,97 @@
+//
+//  Buttons styles
+//  ____________________________________________
+
+//
+//  Imports
+//  --------------------------------------------
+
+@import '../_utils';
+
+//
+//  Variables
+//  --------------------------------------------
+
+@msblog-button__color: @msblog-blue__color;
+@msblog-button__background-color: #e4effb;
+
+//
+//  Common
+//  --------------------------------------------
+
+& when (@media-common = true) {
+    .msblog-button {
+        & {
+            .am-word-break;
+
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            box-sizing: border-box;
+            padding: 0 10px;
+            height: 25px;
+            outline: none;
+            border: 1px solid @msblog-button__color;
+            border-radius: 2px;
+            background: @msblog-button__background-color;
+            box-shadow: none;
+            color: @msblog-button__color;
+            font-weight: @font-weight__regular;
+        }
+
+        &:hover,
+        &:focus {
+            color: @msblog-button__color;
+            text-decoration: none;
+        }
+
+        &:hover {
+            background: darken(@msblog-button__background-color, 10%);
+        }
+
+        &:not(.primary),
+        &:not(.primary):active {
+            box-shadow: none;
+        }
+
+        &.-clear {
+            padding: 0;
+            border: none;
+            background: none;
+        }
+    }
+
+    .msblog-button > .msblog-icon {
+        margin-right: 5px;
+        fill: @msblog-button__color;
+    }
+
+    .msblog-button.-toggle {
+        & {
+            line-height: 1.1;
+        }
+
+        .msblog-icon {
+            position: relative;
+            top: 1px;
+        }
+
+        &.-active .msblog-icon {
+            transform: rotate(180deg);
+        }
+    }
+
+    .msblog-button > .msblog-count:not(:empty) {
+        & {
+            padding-left: 3px;
+        }
+
+        &:before {
+            content: '(';
+        }
+
+        &:after {
+            content: ')';
+        }
+    }
+}

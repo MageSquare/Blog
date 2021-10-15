@@ -1,0 +1,47 @@
+<?php
+/**
+ * @author MageSquare Team
+ * @copyright Copyright (c) 2021 MageSquare 
+ * @package MageSquare_Blog
+ */
+?>
+<?php
+/** @var \MageSquare\Blog\Block\Content\Post\Details $block */
+/** @var \Magento\Framework\Escaper $escaper */
+
+$post = $block->getPost();
+?>
+
+<?php if ($block->isShowAuthorInfo() && $post->getPostedBy()): ?>
+    <span class="posted-by item">
+        <i class="fas fa-user msblog-details-icon"></i>
+        <?= $escaper->escapeHtml(__('By ')); ?>
+        <a rel="author"
+           href="<?= $escaper->escapeUrl($post->getAuthor()->getUrl()); ?>"
+           title="<?= $escaper->escapeHtml($post->getPostedBy()); ?>">
+            <?= $escaper->escapeHtml($post->getPostedBy()); ?>
+        </a>
+    </span>
+<?php endif; ?>
+
+<?php if ($post->getCreatedAt()): ?>
+    <span class="date item">
+        <i class="fas fa-calendar-alt msblog-details-icon"></i>
+        <?= /* @noEscape */ $block->renderDate($post->getPublishedAt()); ?>
+    </span>
+<?php endif; ?>
+
+<?php if ($post->getCommentsEnabled()): ?>
+    <span class="comments item">
+    <?php $commentCount = $block->getCommentsCount();
+    if ($commentCount == 1): ?>
+        <i class="fas fa-comment msblog-details-icon"></i>
+        <?= /* @noEscape */ __('%1 comment', $commentCount); ?>
+    <?php elseif ($commentCount > 1): ?>
+        <i class="fas fa-comment msblog-details-icon"></i>
+        <?= /* @noEscape */ __('%1 comments', $commentCount); ?>
+    <?php else: ?>
+        <?= $escaper->escapeHtml(__('No comments')); ?>
+    <?php endif; ?>
+    </span>
+<?php endif; ?>

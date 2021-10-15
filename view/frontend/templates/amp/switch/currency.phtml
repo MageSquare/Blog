@@ -1,0 +1,47 @@
+<?php
+/**
+ * @author MageSquare Team
+ * @copyright Copyright (c) 2021 MageSquare 
+ * @package MageSquare_Blog
+ */
+?>
+<?php
+/**
+ * MageSquare Currency switcher for AMP
+ *
+ * @var \MageSquare\Blog\Block\Amp\Currency $block
+ */
+?>
+
+<?php if ($block->getCurrencyCount() > 1): ?>
+    <?php $currencies = $block->getCurrencies(); ?>
+    <?php $currentCurrencyCode = $block->getCurrentCurrencyCode(); ?>
+    <?php $id = $block->getIdModifier() ? '-' . $block->getIdModifier() : '' ?>
+    <div id="switcher-currency<?= $block->escapeHtmlAttr($id) ?>" class="switcher currency switcher-currency msblog-amp-navigation">
+        <p class="label switcher-label msblog-amp-title">
+            <strong>
+                <?= $block->escapeHtml(__('Currency')) ?>
+            </strong>
+        </p>
+        <amp-accordion animate class="switcher-options">
+            <section>
+                <h3 id="language-<?= $block->escapeHtml($block->getCurrentCurrencyCode()) ?>"
+                    class="msblog-amp-title view-<?= $block->escapeHtml($block->getCurrentStoreCode()) ?>">
+                    <?= $block->escapeHtml($currentCurrencyCode) ?> - <?= $currencies[$currentCurrencyCode] ? $block->escapeHtml($currencies[$currentCurrencyCode]) : '' ?>
+                    <i class="fas fa-angle-down icon"></i>
+                </h3>
+                <ul class="dropdown switcher-dropdown links msblog-amp-submenu">
+                    <?php foreach ($currencies as $code => $name): ?>
+                        <?php if ($code != $currentCurrencyCode): ?>
+                            <li class="store currency-<?= $block->escapeHtmlAttr($code) ?> switcher-option">
+                                <a href="<?= $block->escapeUrl($block->getStoreUrlAmp($code)) ?>">
+                                    <?= $block->escapeHtml($code) ?> - <?= $block->escapeHtml($name) ?>
+                                </a>
+                            </li>
+                        <?php endif; ?>
+                    <?php endforeach; ?>
+                </ul>
+            </section>
+        </amp-accordion>
+    </div>
+<?php endif; ?>

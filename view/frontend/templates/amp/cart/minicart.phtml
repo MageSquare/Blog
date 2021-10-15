@@ -1,0 +1,16 @@
+<?php
+/**
+ * @author MageSquare Team
+ * @copyright Copyright (c) 2021 MageSquare 
+ * @package MageSquare_Blog
+ */
+?>
+<?php
+/** @var $block \Magento\Checkout\Block\Cart\Sidebar */
+?>
+
+<div class="msblog-amp-minicart">
+    <a class="msblog-amp-link" href="<?= $block->escapeUrl($block->getShoppingCartUrl()); ?>">
+        <i class="fas fa-shopping-cart msblog-amp-icon"></i>
+    </a>
+</div>

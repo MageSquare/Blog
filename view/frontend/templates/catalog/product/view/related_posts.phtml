@@ -1,0 +1,46 @@
+<?php
+/**
+ * @author MageSquare Team
+ * @copyright Copyright (c) 2021 MageSquare 
+ * @package MageSquare_Blog
+ */
+?>
+<?php
+/**
+ * @var \MageSquare\Blog\Block\Content\Post\RelatedProducts $block
+ * @var \Magento\Framework\Escaper $escaper
+ * @var \MageSquare\Blog\ViewModel\Product\View\RelatedPosts $viewModel
+ */
+
+$viewModel = $block->getViewModel();
+?>
+
+<?php if ($viewModel->isCanRender()): ?>
+<div class="msblog-relatedposts-wrap">
+    <?php foreach ($viewModel->getPostsForCurrentProduct() as $post): ?>
+        <div class="msblog-related-post">
+            <a href="<?= $escaper->escapeUrl($post->getUrl()) ?>"
+               class="msblog-image-wrapper <?= $escaper->escapeHtmlAttr($post->getListThumbnailSrc() ? '' : '-placeholder') ?>">
+                <?php if ($post->getListThumbnailSrc()): ?>
+                <figure class="msblog-image"
+                        title="<?= $escaper->escapeHtmlAttr($post->getThumbnailAlt()); ?>"
+                        style="background-image: url(<?= $escaper->escapeUrl($post->getListThumbnailSrc()); ?>)"></figure>
+                <?php endif; ?>
+            </a>
+            <div class="msblog-content">
+                <a href="<?= $escaper->escapeUrl($post->getUrl()); ?>"
+                   class="msblog-headline"
+                   title="<?= $escaper->escapeHtmlAttr($post->getTitle()); ?>">
+                    <?= $escaper->escapeHtml($post->getTitle()); ?>
+                </a>
+                <div class="msblog-text">
+                    <?= /* @noEscape */ $post->getShortContent() ?>
+                </div>
+                <span class="msblog-date">
+                    <?= $escaper->escapeHtml($viewModel->getPublishDate($post)) ?>
+                </span>
+            </div>
+        </div>
+    <?php endforeach; ?>
+</div>
+<?php endif; ?>

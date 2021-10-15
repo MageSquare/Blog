@@ -1,0 +1,40 @@
+<?php
+/**
+ * @author MageSquare Team
+ * @copyright Copyright (c) 2021 MageSquare 
+ * @package MageSquare_Blog
+ */
+?>
+<?php
+/**
+ * @var \Magento\Framework\View\Element\Template $block
+ * @var \Magento\Framework\Escaper $escaper
+ */
+
+$treeHtml = $block->renderCategoriesTreeHtml();
+?>
+<?php if (!$block->isAlreadyWrapped()): ?>
+<div class="msblog-element-block">
+    <?php endif; ?>
+
+    <?php if ($block->getDisplay()): ?>
+        <?php if (!empty(trim($treeHtml))): ?>
+            <div data-msblog-js="accordion" class="msblog-widget-container -categories">
+                <div class="msblog-title" data-msblog-js="heading">
+                    <?= $escaper->escapeHtml($block->getBlockHeader()); ?>
+                </div>
+                <div class="msblog-list" data-msblog-js="content">
+                    <ul class="msblog-categories -level<?= $escaper->escapeHtml($block->getDefaultLevel()); ?>">
+                        <?= /* @noEscape */
+                        $treeHtml; ?>
+                    </ul>
+                </div>
+            </div>
+        <?php else: ?>
+            <div class="msblog-empty"><?= $escaper->escapeHtml(__('Categories were not found')); ?></div>
+        <?php endif; ?>
+    <?php endif; ?>
+
+    <?php if (!$block->isAlreadyWrapped()): ?>
+</div>
+<?php endif; ?>

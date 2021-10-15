@@ -1,0 +1,101 @@
+<?php
+/**
+ * @author MageSquare Team
+ * @copyright Copyright (c) 2021 MageSquare 
+ * @package MageSquare_Blog
+ */
+?>
+<?php
+/**
+ * @var \MageSquare\Blog\Block\Content\Post\Related $block
+ * @var \Magento\Framework\Escaper $escaper
+ */
+
+$collection = $block->getCollection();
+?>
+
+<?php if ($collection && $collection->getSize()): ?>
+<?php $postsCount = $collection->getSize() ?>
+<div class="msblog-related-wrapper">
+    <div class="msblog-title"><?= $escaper->escapeHtml(__('Related Posts'));?></div>
+    <ul class="msblog-related-grid msblog-grid-list msblog-slick-slider"
+        data-mage-init='{"msBlogSlider": {
+            "dots": false,
+            "centerMode": false,
+            "infinite": true,
+            "slidesToShow": <?= $escaper->escapeHtml($postsCount > 3 ? 3 : $postsCount) ?>,
+            "slidesToScroll": 1,
+            "responsive": [
+                {
+                    "breakpoint": 1224,
+                    "settings": {
+                        "slidesToShow": <?= $escaper->escapeHtml($postsCount > 2 ? 2 : $postsCount) ?>,
+                        "slidesToScroll": 1
+                    }
+                },
+                {
+                    "breakpoint": 768,
+                    "settings": {
+                        "slidesToShow": 2,
+                        "slidesToScroll": 1
+                    }
+                },
+                {
+                    "breakpoint": 425,
+                    "settings": {
+                        "slidesToShow": 1,
+                        "slidesToScroll": 1
+                    }
+                },
+                {
+                    "breakpoint": 320,
+                    "settings": {
+                        "slidesToShow": 1,
+                        "arrows": false,
+                        "dots": true
+                    }
+                }
+            ]
+        }}'
+    >
+        <?php foreach ($collection as $post): ?>
+            <li class="list-item msblog-item">
+                <?php if ($post->getListThumbnailSrc()): ?>
+                    <div class="msblog-wrapper">
+                        <a href="<?= $escaper->escapeUrl($post->getUrl()); ?>"
+                           title="<?= $escaper->escapeHtml($post->getTitle()); ?>">
+                            <img src="<?= $escaper->escapeUrl($post->getListThumbnailSrc()); ?>"
+                                 class="msblog-image"
+                                 alt="<?= $escaper->escapeHtml($post->getThumbnailAlt()); ?>"/>
+                        </a>
+                    </div>
+                <?php endif; ?>
+                <div class="msblog-content">
+                    <h3 class="msblog-title">
+                        <a class="msblog-link"
+                           href="<?= $escaper->escapeUrl($post->getUrl()); ?>"
+                           title="<?= $escaper->escapeHtml($post->getTitle()); ?>"
+                        >
+                            <?= $escaper->escapeHtml($post->getTitle()); ?>
+                        </a>
+                    </h3>
+                    <div class="msblog-bottom">
+                        <div class="msblog-date">
+                            <?= $escaper->escapeHtml($block->renderDate($post->getPublishedAt())); ?>
+                        </div>
+                    </div>
+                </div>
+                <div class="msblog-footer">
+                    <a class="msblog-read"
+                       href="<?= $escaper->escapeUrl($block->getReadMoreUrl($post)); ?>"
+                       title="<?= $escaper->escapeHtml(__('Read More')); ?>"
+                    >
+                        <?= $escaper->escapeHtml(__('Read More')); ?>
+                        <span class="msblog-arrow"></span>
+                    </a>
+                </div>
+            </li>
+        <?php endforeach; ?>
+    </ul>
+</div>
+<?php endif; ?>

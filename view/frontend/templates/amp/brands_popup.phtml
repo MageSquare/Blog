@@ -1,0 +1,21 @@
+<?php
+/**
+ * @author MageSquare Team
+ * @copyright Copyright (c) 2021 MageSquare 
+ * @package MageSquare_Blog
+ */
+?>
+<?php
+/**
+ * @var \MageSquare\ShopbyBrand\Block\BrandsPopup $block
+ */
+?>
+
+<section class="catalog-item level-top">
+    <h2 class="msblog-amp-title">
+        <a class="msblog-amp-item" href="<?= $block->escapeUrl($block->getAllBrandsUrl()) ?>">
+            <?= $block->escapeHtml($block->getLabel()) ?>
+        </a>
+    </h2>
+    <span></span>
+</section>

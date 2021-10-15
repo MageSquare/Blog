@@ -1,0 +1,118 @@
+<?xml version="1.0"?>
+<!--
+/**
+ * @author MageSquare Team
+ * @copyright Copyright (c) 2021 MageSquare 
+ * @package MageSquare_Blog
+ */
+-->
+
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:ObjectManager/etc/config.xsd">
+    <type name="Magento\Framework\View\Page\Config\Renderer">
+        <plugin name="MageSquare_Blog::make-css" type="MageSquare\Blog\Plugin\View\Page\Config\Renderer" />
+    </type>
+
+    <type name="Magento\Framework\App\RouterList">
+        <arguments>
+            <argument name="routerList" xsi:type="array">
+                <item name="magesquare_blog_root" xsi:type="array">
+                    <item name="class" xsi:type="string">MageSquare\Blog\Controller\Router</item>
+                    <item name="disable" xsi:type="boolean">false</item>
+                    <item name="sortOrder" xsi:type="string">60</item>
+                </item>
+            </argument>
+        </arguments>
+    </type>
+
+    <type name="Magento\Theme\Block\Html\Topmenu">
+        <plugin name="blog-topmenu" type="MageSquare\Blog\Plugin\Block\Topmenu" />
+    </type>
+
+    <type name="Magento\Framework\App\PageCache\Identifier">
+        <plugin name="MageSquare_Blog::mobileSettingsFPC"
+                type="MageSquare\Blog\Plugin\Framework\App\PageCache\Identifier" sortOrder="20"/>
+    </type>
+
+    <type name="Infortis\UltraMegamenu\Block\Navigation">
+        <plugin name="MageSquare_Blog::TopMenuUltimo"
+                type="MageSquare\Blog\Plugin\Block\TopmenuThemes" sortOrder="900" />
+    </type>
+
+    <type name="Smartwave\Megamenu\Block\Topmenu">
+        <plugin name="MageSquare_Blog::TopMenuPorto"
+                type="MageSquare\Blog\Plugin\Block\TopmenuThemes" sortOrder="900" />
+    </type>
+
+    <type name="MageSquare\MegaMenu\Observer\Layout\Handle">
+        <plugin name="MageSquare_Blog::compatibility_with_mega_menu"
+                type="MageSquare\Blog\Plugin\MegaMenu\Observer\Layout\HandlePlugin" sortOrder="900" />
+    </type>
+
+    <type name="MageSquare\ShopbyBrand\Block\BrandsPopup">
+        <plugin name="MageSquare_Blog::compatibility_with_brands_popup"
+                type="MageSquare\Blog\Plugin\ShopbyBrand\Block\BrandsPopupPlugin" sortOrder="900" />
+    </type>
+
+    <type name="MageSquare\MegaMenu\Model\Menu\TreeResolver">
+        <plugin name="MageSquare_Blog::MageSquare_MegaMenu"
+                type="MageSquare\Blog\Plugin\MegaMenu\Model\Menu\TreeResolverPlugin" sortOrder="20" />
+    </type>
+
+    <type name="Magento\Theme\Controller\Result\JsFooterPlugin">
+        <plugin name="MageSquare_Blog::skip_moving_js" type="MageSquare\Blog\Plugin\Theme\Controller\Result\JsFooterPlugin\SkipMovingJsPlugin"/>
+    </type>
+
+    <type name="MageSquare\Blog\Api\Data\GetPostRelatedProductsInterface">
+        <arguments>
+            <argument name="collectionModifiers" xsi:type="array">
+                <item name="basicAttrs" xsi:type="object">
+                    MageSquare\Blog\Model\Posts\RelatedProducts\Products\AddBasicAttributesModifier
+                </item>
+                <item name="frontendData" xsi:type="object">
+                    MageSquare\Blog\Model\Posts\RelatedProducts\Products\AddFrontendDataModifier
+                </item>
+                <item name="reviewsData" xsi:type="object">
+                    MageSquare\Blog\Model\Posts\RelatedProducts\Products\AddReviewsDataModifier
+                </item>
+            </argument>
+        </arguments>
+    </type>
+
+    <virtualType name="MageSquare\Blog\ViewModel\Posts\Preview\RelatedProducts" type="MageSquare\Blog\ViewModel\Posts\RelatedProducts">
+        <arguments>
+            <argument name="getPostRelatedProducts" xsi:type="object">
+                MageSquare\Blog\Model\ResourceModel\Posts\RelatedProducts\GetPostRelatedProductsForPreview
+            </argument>
+        </arguments>
+    </virtualType>
+
+    <type name="MageSquare\EmailUnsubscribe\Model\Unsubscribe">
+        <arguments>
+            <argument name="types" xsi:type="array">
+                <item name="msblog/comments/notify_about_replies" xsi:type="array">
+                    <item name="redirectPath" xsi:type="string">/</item>
+                    <item name="successMessage" xsi:type="string">You will no longer receive similar notifications.</item>
+                    <item name="exceptionMessage" xsi:type="string">Something went wrong and your unsubscribe request wasn't sent. Please, try again later.</item>
+                </item>
+            </argument>
+        </arguments>
+    </type>
+
+    <virtualType name="MageSquare\Blog\ViewModel\ContentPreparation\WysiwygContent" type="MageSquare\Blog\ViewModel\ContentPreparation\CompositePreparator">
+        <arguments>
+            <argument name="contentPreparers" xsi:type="array">
+                <item name="scripts" xsi:type="object">MageSquare\Blog\ViewModel\ContentPreparation\Preparers\RemoveScriptsFromContent</item>
+                <item name="wysiwyg" xsi:type="object">MageSquare\Blog\ViewModel\ContentPreparation\Preparers\ProcessWysiwygContent</item>
+            </argument>
+        </arguments>
+    </virtualType>
+
+    <virtualType name="MageSquare\Blog\ViewModel\ContentPreparation\WysiwygContent\Amp" type="MageSquare\Blog\ViewModel\ContentPreparation\WysiwygContent">
+        <arguments>
+            <argument name="contentPreparers" xsi:type="array">
+                <item name="images" xsi:type="object">MageSquare\Blog\ViewModel\ContentPreparation\Preparers\ReplaceImagesToAmpNotation</item>
+                <item name="videos" xsi:type="object">MageSquare\Blog\ViewModel\ContentPreparation\Preparers\ReplaceVideoToAmpNotation</item>
+            </argument>
+        </arguments>
+    </virtualType>
+</config>

@@ -1,0 +1,28 @@
+<?php
+/**
+ * @author MageSquare Team
+ * @copyright Copyright (c) 2021 MageSquare 
+ * @package MageSquare_Blog
+ */
+?>
+<?php
+/** @var MageSquare\Blog\Block\Content\Post\Details $block */
+/** @var \Magento\Framework\Escaper $escaper */
+
+$categories = $block->getCategories();
+$categoriesCount = $categories->count();
+$categoryNumber = 0;
+?>
+
+<?php if ($categoriesCount): ?>
+    <div class="msblog-category">
+        <?= $escaper->escapeHtml(__('Posted in: ')); ?>
+        <?php foreach ($categories as $key => $category): ?>
+            <?php $categoryNumber++; ?>
+            <a class="msblog-ref"
+               href="<?= $escaper->escapeUrl($category->getUrl()); ?>"
+               title="<?= $escaper->escapeHtml($category->getName()); ?>">
+                <?= $escaper->escapeHtml($category->getName()); ?></a><?= $categoriesCount > $categoryNumber ? ',' : ''; ?>
+        <?php endforeach; ?>
+    </div>
+<?php endif; ?>

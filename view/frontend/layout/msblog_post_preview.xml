@@ -1,0 +1,37 @@
+<?xml version="1.0"?>
+<!--
+/**
+ * @author MageSquare Team
+ * @copyright Copyright (c) 2021 MageSquare 
+ * @package MageSquare_Blog
+ */
+-->
+<page xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" layout="1column" xsi:noNamespaceSchemaLocation="urn:magento:framework:View/Layout/etc/page_configuration.xsd">
+    <update handle="msblog_default"/>
+    <body>
+        <referenceContainer name="layout.content">
+            <block class="MageSquare\Blog\Block\Content\Post" name="msblog.post" as="post" template="MageSquare_Blog::post.phtml" cacheable="false">
+                <block class="MageSquare\Blog\Block\Social"
+                       name="msblog_social"
+                       as="msblog_social"
+                       template="MageSquare_Blog::social.phtml"/>
+
+                <block class="MageSquare\Blog\Block\Content\Post\Helpful"
+                       name="msblog_helpful"
+                       as="msblog_helpful"/>
+
+                <block class="MageSquare\Blog\Block\Content\Post\RelatedProducts"
+                       name="msblog.post.related.products"
+                       template="MageSquare_Blog::post/related_products.phtml"
+                       ifconfig="msblog/posts_products_relation/show_rp_on_post_page"
+                >
+                    <arguments>
+                        <argument name="view_model" xsi:type="object">
+                            MageSquare\Blog\ViewModel\Posts\Preview\RelatedProducts
+                        </argument>
+                    </arguments>
+                </block>
+            </block>
+        </referenceContainer>
+    </body>
+</page>

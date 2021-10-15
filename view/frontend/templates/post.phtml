@@ -1,0 +1,111 @@
+<?php
+/**
+ * @author MageSquare Team
+ * @copyright Copyright (c) 2021 MageSquare 
+ * @package MageSquare_Blog
+ */
+?>
+<?php
+/** @var \MageSquare\Blog\Block\Content\Post $block */
+/** @var \Magento\Framework\Escaper $escaper */
+
+$post = $block->getPost();
+$image = $post->getPostThumbnailSrc();
+?>
+<div class="msblog-post-container">
+    <?php if ($image): ?>
+        <div class="msblog-wrapper">
+        <?php if ($block->hasThumbnailUrl()): ?>
+            <a class="thumbnail-url"
+               title="<?= $escaper->escapeHtml($post->getTitle()); ?>"
+               href="<?= $escaper->escapeUrl($block->getThumbnailUrl()); ?>">
+        <?php endif; ?>
+                <img src="<?= $escaper->escapeUrl($image); ?>"
+                     class="msblog-image"
+                     alt="<?= $escaper->escapeHtml($post->getThumbnailAlt('post')); ?>" />
+        <?php if ($block->hasThumbnailUrl()): ?>
+            </a>
+        <?php endif; ?>
+        </div>
+    <?php endif; ?>
+    <div class="msblog-tags">
+        <?= $block->getTagsHtml($post); ?>
+    </div>
+    <div class="msblog-features -post">
+        <?= $block->getCategoriesHtml($post); ?>
+        <?= $block->getAuthorHtml($post); ?>
+        <?= $block->getShortCommentsHtml($post); ?>
+    </div>
+    <div class="msblog-content">
+        <?= /* @noEscape */ $post->getFullContent(); ?>
+        <div class="msblog-bottom">
+            <div>
+                <span class="msblog-date">
+                    <?= $escaper->escapeHtml($block->renderDate($post->getPublishedAt())); ?>
+                </span>
+            </div>
+            <?php if ($block->isShowViewsCounter()): ?>
+                <span class="views msblog-views" data-msblog-js="views-counter">
+                    <?= $escaper->escapeHtml(__("%1 view(s)", $post->getViews())); ?>
+            </span>
+            <?php endif; ?>
+            <?php if ($block->getShowPrintLink()): ?>
+                <div class="msblog-item -print">
+                    <svg class="msblog-svg print <?= $escaper->escapeHtml($block->getColorClass()); ?>">
+                        <use xlink:href="<?= $escaper->escapeUrl($block->getViewFileUrl('MageSquare_Blog::images/sprite.svg')); ?>#print"></use>
+                    </svg>
+                    <a class="msblog-ref"
+                       href="#"
+                       onclick="window.print(); return false;"
+                       title="<?= $escaper->escapeHtml(__('Print This Page')); ?>">
+                        <?= $escaper->escapeHtml(__('Print')); ?>
+                    </a>
+                </div>
+            <?php endif; ?>
+        </div>
+    </div>
+    <?php if ($block->getSettingHelper()->getSocialEnabled()): ?>
+        <?= $block->getSocialHtml(); ?>
+    <?php endif; ?>
+    <?php if ($block->getSettingHelper()->getHelpfulEnabled()): ?>
+        <?= $block->getHelpfulHtml(); ?>
+    <?php endif; ?>
+</div>
+
+<?= $block->getChildHtml('msblog.post.related');?>
+<?= $block->getChildHtml('msblog.post.related.products');?>
+
+<?php if ($block->getUseCommentsGlobal() && $post->getCommentsEnabled()): ?>
+    <div class="msblog-comments-wrapper">
+        <div class="msblog-title"><?= $escaper->escapeHtml(__('Comments')); ?></div>
+        <div class="msblog-comments-container" id="comments">
+            <?= $block->getChildHtml('msblog.comments.list') ?>
+        </div>
+
+        <div class="msblog-comments-action" data-msblog-js="comments-form">
+            <?= $block->getChildHtml('msblog.comments.form') ?>
+        </div>
+    </div>
+<?php endif; ?>
+<div class="msblog-overlay" data-msblog-js="overlay"></div>
+
+<script type="text/x-magento-init">
+{
+    "*": {
+         "msBlogAccord": {}
+    }
+}
+</script>
+<script type="text/x-magento-init">
+{
+    "[data-msblog-js='views-counter']": {
+         "msBlogViewStatistic": {
+            "postId" : <?= (int) $block->getPost()->getPostId() ?>
+         }
+    }
+}
+</script>
+<?php foreach ($block->getJsonMicroData() as $microData): ?>
+    <script type="application/ld+json"><?= /* @noEscape */$microData; ?></script>
+<?php endforeach;?>
+

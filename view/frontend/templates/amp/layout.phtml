@@ -1,0 +1,16 @@
+<?php
+/**
+ * @author MageSquare Team
+ * @copyright Copyright (c) 2021 MageSquare 
+ * @package MageSquare_Blog
+ */
+?>
+<?php
+/** @var \MageSquare\Blog\Block\Layout $block */
+?>
+
+<div class="msblog-blog-wrap mobile <?= /* @noEscape */ $block->getMobileLayoutCode(); ?>">
+    <?php foreach ($block->getMobileBlocks('content') as $alias) : ?>
+        <?= /* @noEscape */ $block->getContentBlockHtml($alias); ?>
+    <?php endforeach; ?>
+</div>

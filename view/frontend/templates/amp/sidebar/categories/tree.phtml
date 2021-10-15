@@ -1,0 +1,29 @@
+<?php
+/**
+ * @author MageSquare Team
+ * @copyright Copyright (c) 2021 MageSquare 
+ * @package MageSquare_Blog
+ */
+?>
+<?php
+/** @var \MageSquare\Blog\Block\Sidebar\Category $block */
+
+$collection = $block->getCollection();
+?>
+
+<?php if ($collection->getSize()) : ?>
+    <?php foreach ($collection as $category) : ?>
+        <?php $activeClass = $category->getIsActive() ? '-active' : ''; ?>
+        <li class="msblog-category <?= /* @noEscape */ $activeClass; ?>">
+            <a href="<?= $block->escapeUrl($category->getUrl()); ?>"
+               title="<?= $block->escapeHtml($category->getName()); ?>">
+                <?= $block->escapeHtml($category->getName()); ?>
+            </a>
+            <?php if ($category->hasActiveChildren()) : ?>
+                <ul class="categories item level-<?= $category->getLevel() + 1; ?>">
+                    <?= /* @noEscape */ $block->renderChildrenItems($category->getCategoryId()); ?>
+                </ul>
+            <?php endif; ?>
+        </li>
+    <?php endforeach; ?>
+<?php endif; ?>

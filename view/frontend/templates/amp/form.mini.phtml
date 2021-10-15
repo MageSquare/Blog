@@ -1,0 +1,45 @@
+<?php
+/**
+ * @author MageSquare Team
+ * @copyright Copyright (c) 2021 MageSquare 
+ * @package MageSquare_Blog
+ */
+?>
+<?php
+/** @var $block \Magento\Framework\View\Element\Template */
+/** @var $helper \Magento\Search\Helper\Data */
+
+// @codingStandardsIgnoreLine
+$helper = $this->helper(\Magento\Search\Helper\Data::class);
+$url = str_replace(['https:', 'http:'], '', $helper->getResultUrl());
+?>
+
+<div class="msblog-search-form">
+    <label for="msblog-amp-search">
+        <i class="fas fa-search msblog-amp-icon"></i>
+    </label>
+    <input type="checkbox" class="msblog-amp-icon -hidden" id="msblog-amp-search">
+    <div class="msblog-amp-search -hidden">
+        <form class="form minisearch" id="search_mini_form"
+              target="_top"
+              action="<?= $block->escapeUrl($url) ?>"
+              method="get">
+            <input id="search"
+                   type="text"
+                   name="<?= $block->escapeHtml($helper->getQueryParamName()) ?>"
+                   value="<?= $block->escapeHtml($helper->getEscapedQueryText()) ?>"
+                   placeholder="<?= $block->escapeHtml(__('Search entire store here...')) ?>"
+                   class="msblog-amp-input"
+                   maxlength="<?= $block->escapeHtml($helper->getMaxQueryLength()); ?>"
+                   role="combobox"
+                   aria-haspopup="false"
+                   aria-autocomplete="both"
+                   autocomplete="off"/>
+            <button type="submit"
+                    title="<?= $block->escapeHtml(__('Search')) ?>"
+                    class="msblog-amp-action">
+                <?= $block->escapeHtml(__('Search')) ?>
+            </button>
+        </form>
+    </div>
+</div>

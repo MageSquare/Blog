@@ -1,0 +1,27 @@
+<?xml version="1.0"?>
+<!--
+/**
+ * @author MageSquare Team
+ * @copyright Copyright (c) 2021 MageSquare 
+ * @package MageSquare_Blog
+ */
+-->
+
+<page xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:View/Layout/etc/page_configuration.xsd">
+    <update handle="customer_account"/>
+    <body>
+        <referenceContainer name="content">
+            <block name="msblog_posts" template="MageSquare_Blog::post/account.phtml" cacheable="false">
+                <arguments>
+                    <argument name="view_model" xsi:type="object">MageSquare\Blog\ViewModel\Posts\Account</argument>
+                </arguments>
+            </block>
+        </referenceContainer>
+
+        <referenceBlock name="msblog-customer-account-tab-blog-posts">
+            <arguments>
+                <argument name="is_highlighted" xsi:type="boolean">true</argument>
+            </arguments>
+        </referenceBlock>
+    </body>
+</page>

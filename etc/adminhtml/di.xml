@@ -1,0 +1,166 @@
+<?xml version="1.0"?>
+<!--
+/**
+ * @author MageSquare Team
+ * @copyright Copyright (c) 2021 MageSquare 
+ * @package MageSquare_Blog
+ */
+-->
+
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:ObjectManager/etc/config.xsd">
+    <type name="MageSquare\Blog\Model\Config\Backend\SimpleText">
+        <arguments>
+            <argument name="data" xsi:type="array">
+                <item name="escaper" xsi:type="object">Magento\Framework\Escaper</item>
+            </argument>
+        </arguments>
+    </type>
+
+    <type name="MageSquare\Blog\Model\DataProvider\Category\Modifier\UseDefault">
+        <arguments>
+            <argument name="data" xsi:type="array">
+                <item name="repository" xsi:type="object">MageSquare\Blog\Api\CategoryRepositoryInterface</item>
+            </argument>
+            <argument name="currentEntityKey" xsi:type="const">MageSquare\Blog\Controller\Adminhtml\Categories\Edit::CURRENT_MAGESQUARE_BLOG_CATEGORY</argument>
+            <argument name="fieldsByStore" xsi:type="const">MageSquare\Blog\Api\Data\CategoryInterface::FIELDS_BY_STORE</argument>
+        </arguments>
+    </type>
+
+    <type name="MageSquare\Blog\Model\DataProvider\Tag\Modifier\UseDefault">
+        <arguments>
+            <argument name="data" xsi:type="array">
+                <item name="repository" xsi:type="object">MageSquare\Blog\Api\TagRepositoryInterface</item>
+            </argument>
+            <argument name="currentEntityKey" xsi:type="const">MageSquare\Blog\Controller\Adminhtml\Tags\Edit::CURRENT_MAGESQUARE_BLOG_TAG</argument>
+            <argument name="fieldsByStore" xsi:type="const">MageSquare\Blog\Api\Data\TagInterface::FIELDS_BY_STORE</argument>
+        </arguments>
+    </type>
+
+    <type name="MageSquare\Blog\Model\DataProvider\Author\Modifier\UseDefault">
+        <arguments>
+            <argument name="data" xsi:type="array">
+                <item name="repository" xsi:type="object">MageSquare\Blog\Api\AuthorRepositoryInterface</item>
+            </argument>
+            <argument name="currentEntityKey" xsi:type="const">MageSquare\Blog\Controller\Adminhtml\Authors\Edit::CURRENT_MAGESQUARE_BLOG_AUTHOR</argument>
+            <argument name="fieldsByStore" xsi:type="const">MageSquare\Blog\Api\Data\AuthorInterface::FIELDS_BY_STORE</argument>
+        </arguments>
+    </type>
+
+    <virtualType name="MageSquare\Blog\Model\Config\Source\EmailTemplate" type="MageSquare\Blog\Model\Config\Source\AbstractTemplate">
+        <arguments>
+            <argument name="origTemplateCode" xsi:type="string">msblog_notify_admin_new_comment_email_template</argument>
+        </arguments>
+    </virtualType>
+
+    <virtualType name="MageSquare\Blog\Model\Config\Source\ReplyEmailTemplate" type="MageSquare\Blog\Model\Config\Source\AbstractTemplate">
+        <arguments>
+            <argument name="origTemplateCode" xsi:type="string">msblog_comments_email_template</argument>
+        </arguments>
+    </virtualType>
+
+    <virtualType name="MageSquare\Blog\Model\DataProvider\Category\Modifier\Pool" type="Magento\Ui\DataProvider\Modifier\Pool">
+        <arguments>
+            <argument name="modifiers" xsi:type="array">
+                <item name="use_default" xsi:type="array">
+                    <item name="class" xsi:type="string">MageSquare\Blog\Model\DataProvider\Category\Modifier\UseDefault</item>
+                    <item name="sortOrder" xsi:type="number">10</item>
+                </item>
+            </argument>
+        </arguments>
+    </virtualType>
+
+    <virtualType name="MageSquare\Blog\Model\DataProvider\Tag\Modifier\Pool" type="Magento\Ui\DataProvider\Modifier\Pool">
+        <arguments>
+            <argument name="modifiers" xsi:type="array">
+                <item name="use_default" xsi:type="array">
+                    <item name="class" xsi:type="string">MageSquare\Blog\Model\DataProvider\Tag\Modifier\UseDefault</item>
+                    <item name="sortOrder" xsi:type="number">10</item>
+                </item>
+            </argument>
+        </arguments>
+    </virtualType>
+
+    <virtualType name="MageSquare\Blog\Model\DataProvider\Author\Modifier\Pool" type="Magento\Ui\DataProvider\Modifier\Pool">
+        <arguments>
+            <argument name="modifiers" xsi:type="array">
+                <item name="use_default" xsi:type="array">
+                    <item name="class" xsi:type="string">MageSquare\Blog\Model\DataProvider\Author\Modifier\UseDefault</item>
+                    <item name="sortOrder" xsi:type="number">10</item>
+                </item>
+            </argument>
+        </arguments>
+    </virtualType>
+
+    <type name="MageSquare\Blog\Model\DataProvider\CategoryDataProvider">
+        <arguments>
+            <argument name="pool" xsi:type="object">MageSquare\Blog\Model\DataProvider\Category\Modifier\Pool</argument>
+        </arguments>
+    </type>
+
+    <type name="MageSquare\Blog\Model\DataProvider\TagDataProvider">
+        <arguments>
+            <argument name="pool" xsi:type="object">MageSquare\Blog\Model\DataProvider\Tag\Modifier\Pool</argument>
+        </arguments>
+    </type>
+
+    <type name="MageSquare\Blog\Model\DataProvider\AuthorDataProvider">
+        <arguments>
+            <argument name="pool" xsi:type="object">MageSquare\Blog\Model\DataProvider\Author\Modifier\Pool</argument>
+        </arguments>
+    </type>
+
+    <virtualType name="MageSquare\Blog\Block\Adminhtml\System\Config\Field\Layout\Desktop\Post"
+                 type="MageSquare\Blog\Block\Adminhtml\System\Config\Field\Layout">
+        <arguments>
+            <argument name="layout" xsi:type="string">desktop_post</argument>
+        </arguments>
+    </virtualType>
+
+    <virtualType name="MageSquare\Blog\Block\Adminhtml\System\Config\Field\Layout\Desktop\Mlist"
+                 type="MageSquare\Blog\Block\Adminhtml\System\Config\Field\Layout">
+        <arguments>
+            <argument name="layout" xsi:type="string">desktop_list</argument>
+        </arguments>
+    </virtualType>
+
+    <virtualType name="MageSquare\Blog\Block\Adminhtml\System\Config\Field\Layout\Mobile\Post"
+                 type="MageSquare\Blog\Block\Adminhtml\System\Config\Field\Layout\Mobile">
+        <arguments>
+            <argument name="layout" xsi:type="string">mobile_post</argument>
+        </arguments>
+    </virtualType>
+
+    <virtualType name="MageSquare\Blog\Block\Adminhtml\System\Config\Field\Layout\Mobile\Mlist"
+                 type="MageSquare\Blog\Block\Adminhtml\System\Config\Field\Layout\Mobile">
+        <arguments>
+            <argument name="layout" xsi:type="string">mobile_list</argument>
+        </arguments>
+    </virtualType>
+
+    <type name="MageSquare\Blog\Model\ResourceModel\Posts\RelatedProducts\GetPostRelatedProducts">
+        <arguments>
+            <argument name="collectionModifiers" xsi:type="array">
+                <item name="basicAttributes" xsi:type="object">MageSquare\Blog\Model\Posts\RelatedProducts\Products\AddBasicAttributesModifier</item>
+                <item name="backendView" xsi:type="object">MageSquare\Blog\Model\Posts\RelatedProducts\Products\BackendViewCollectionModifier</item>
+            </argument>
+        </arguments>
+    </type>
+
+    <virtualType name="MageSquare\Blog\Ui\DataProvider\Posts\RelatedProducts\DataModifierPool"
+                 type="Magento\Ui\DataProvider\Modifier\Pool">
+        <arguments>
+            <argument name="modifiers" xsi:type="array">
+                <item name="related_products" xsi:type="array">
+                    <item name="class" xsi:type="string">MageSquare\Blog\Ui\DataProvider\Posts\RelatedProducts\DataModifier</item>
+                    <item name="sortOrder" xsi:type="number">10</item>
+                </item>
+            </argument>
+        </arguments>
+    </virtualType>
+
+    <type name="MageSquare\Blog\Model\DataProvider\PostDataProvider">
+        <arguments>
+            <argument name="uiDataModifiersPool" xsi:type="object">MageSquare\Blog\Ui\DataProvider\Posts\RelatedProducts\DataModifierPool</argument>
+        </arguments>
+    </type>
+</config>

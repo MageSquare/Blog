@@ -1,0 +1,24 @@
+<?php
+/**
+ * @author MageSquare Team
+ * @copyright Copyright (c) 2021 MageSquare 
+ * @package MageSquare_Blog
+ */
+?>
+<?php
+/** @var \MageSquare\Blog\Block\Content\Post\Details $block */
+
+$tags = $block->getTags(); ?>
+
+<?php if ($tags && count($tags)): ?>
+    <?php $isFirst = true; ?>
+    <?php foreach ($tags as $tag): ?>
+        <?php if (!$isFirst): ?>
+            ,
+        <?php endif ?>
+        <a href="<?= $block->escapeUrl($tag->getUrl()); ?>" class="msblog-tag">
+            #<?= $block->escapeHtml($tag->getName()); ?>
+        </a>
+        <?php $isFirst = false; ?>
+    <?php endforeach; ?>
+<?php endif; ?>

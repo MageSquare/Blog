@@ -1,0 +1,58 @@
+<?xml version="1.0"?>
+<!--
+/**
+ * @author MageSquare Team
+ * @copyright Copyright (c) 2021 MageSquare 
+ * @package MageSquare_Blog
+ */
+-->
+<page xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" layout="1column" xsi:noNamespaceSchemaLocation="urn:magento:framework:View/Layout/etc/page_configuration.xsd">
+    <update handle="msblog_default"/>
+    <head>
+        <css src="MageSquare_Base::vendor/slick/msslick.min.css"/>
+    </head>
+
+    <body>
+        <referenceContainer name="layout.content">
+            <block class="MageSquare\Blog\Block\Content\Post" name="msblog.post" as="post" template="MageSquare_Blog::post.phtml">
+                <block class="MageSquare\Blog\Block\Social"
+                       name="msblog_social"
+                       as="msblog_social"
+                       template="MageSquare_Blog::social.phtml"/>
+
+                <block class="MageSquare\Blog\Block\Content\Post\Helpful"
+                       name="msblog_helpful"
+                       as="msblog_helpful"/>
+
+                <block class="MageSquare\Blog\Block\Content\Post\Related"
+                       name="msblog.post.related"
+                       template="MageSquare_Blog::post/related.phtml"/>
+
+                <block class="MageSquare\Blog\Block\Content\Post\RelatedProducts"
+                       name="msblog.post.related.products"
+                       template="MageSquare_Blog::post/related_products.phtml"
+                       ifconfig="msblog/posts_products_relation/show_rp_on_post_page"
+                >
+                    <arguments>
+                        <argument name="view_model" xsi:type="object">
+                            MageSquare\Blog\ViewModel\Posts\RelatedProducts
+                        </argument>
+                    </arguments>
+                </block>
+
+                <block class="MageSquare\Blog\Block\Comments\Form"
+                       name="msblog.comments.form"
+                       template="MageSquare_Blog::comments/form.phtml"/>
+
+                <block class="MageSquare\Blog\Block\Comments"
+                       name="msblog.comments.list"
+                       as="msblog.comments.list"
+                       template="MageSquare_Blog::comments/list.phtml">
+                    <block class="MageSquare\Blog\Block\Comments\Message"
+                        name="msblog_comments_message"
+                        template="MageSquare_Blog::comments/list/message.phtml"/>
+                </block>
+            </block>
+        </referenceContainer>
+    </body>
+</page>

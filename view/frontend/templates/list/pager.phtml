@@ -1,0 +1,32 @@
+<?php
+/**
+ * @author MageSquare Team
+ * @copyright Copyright (c) 2021 MageSquare 
+ * @package MageSquare_Blog
+ */
+?>
+<?php
+/** @var  \MageSquare\Blog\Block\Content\Lists\Pager $block */
+$collection = $block->getCollection();
+?>
+<?php if ($collection && $collection->getSize()): ?>
+    <?php if ($block->getLastPageNum() > 1): ?>
+        <div class="msblog-pager-container">
+            <div class="msblog-links">
+                <a class="msblog-link -new <?= /* @noEscape */ ($block->isFirstPage()) ? '-disabled' : '' ?>"
+                   href="<?= $block->escapeUrl($block->getPreviousPageUrl()) ?>"
+                   rel="prev"
+                   title="<?= $block->escapeHtml(__('Newer Entries')) ?>"
+                ></a>
+                <span class="msblog-pagination">
+                    <?= $block->escapeHtml(__('%1 of %2', $block->getCurrentPage(), $block->getLastPageNum())) ?>
+                </span>
+                <a class="msblog-link <?= /* @noEscape */  ($block->isLastPage()) ? '-disabled' : '' ?>"
+                   href="<?= $block->escapeUrl($block->getNextPageUrl()) ?>"
+                   rel="next"
+                   title="<?= $block->escapeHtml(__('Older Entries')) ?>"
+                ></a>
+            </div>
+        </div>
+    <?php endif; ?>
+<?php endif; ?>

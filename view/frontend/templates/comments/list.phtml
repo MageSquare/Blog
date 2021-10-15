@@ -1,0 +1,41 @@
+<?php
+/**
+ * @author MageSquare Team
+ * @copyright Copyright (c) 2021 MageSquare 
+ * @package MageSquare_Blog
+ */
+?>
+<?php
+/** @var $block \MageSquare\Blog\Block\Comments */
+/** @var \Magento\Framework\Escaper $escaper */
+
+$collection = $block->getCollection();
+?>
+
+<div data-msblog-js="livestream">
+    <div class="msblog-comments-block" data-msblog-js="comments_wrapper">
+        <?php if ($collection && $collection->getSize()): ?>
+            <?php foreach ($collection as $message): ?>
+                <?= /* @noEscape */ $block->getMessageHtml($message); ?>
+            <?php endforeach; ?>
+        <?php endif; ?>
+    </div>
+    <div class="msblog-comment-reply" id="msblog-comment-form"></div>
+</div>
+
+<script>
+    require([
+        'jquery',
+        'MageSquare_Blog/js/msblog/comments',
+        'domReady!'
+    ], function ($) {
+        $('[data-msblog-js="livestream"]').msblogComments({
+            form_selector: '.msblog-comment-reply',
+            form_url: '<?= $escaper->escapeUrl($block->getFormUrl()) ?>',
+            update_url: '<?= $escaper->escapeUrl($block->getUpdateUrl()) ?>',
+            post_url: '<?= $escaper->escapeUrl($block->getPostUrl()) ?>',
+            post_id: '<?= $escaper->escapeHtml($block->getPostId()); ?>',
+            session_id: '<?= $escaper->escapeHtml($block->getSessionId()); ?>'
+        });
+    });
+</script>

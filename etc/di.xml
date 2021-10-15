@@ -1,0 +1,236 @@
+<?xml version="1.0"?>
+<!--
+/**
+ * @author MageSquare Team
+ * @copyright Copyright (c) 2021 MageSquare 
+ * @package MageSquare_Blog
+ */
+-->
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:ObjectManager/etc/config.xsd">
+    <preference for="MageSquare\Blog\Api\Data\ViewInterface" type="MageSquare\Blog\Model\View" />
+    <preference for="MageSquare\Blog\Api\ViewRepositoryInterface" type="MageSquare\Blog\Model\Repository\ViewRepository" />
+    <preference for="MageSquare\Blog\Api\Data\TagInterface" type="MageSquare\Blog\Model\Tag" />
+    <preference for="MageSquare\Blog\Api\Data\AuthorInterface" type="MageSquare\Blog\Model\Author" />
+    <preference for="MageSquare\Blog\Api\TagRepositoryInterface" type="MageSquare\Blog\Model\Repository\TagRepository" />
+    <preference for="MageSquare\Blog\Api\AuthorRepositoryInterface" type="MageSquare\Blog\Model\Repository\AuthorRepository" />
+    <preference for="MageSquare\Blog\Api\Data\PostInterface" type="MageSquare\Blog\Model\Posts" />
+    <preference for="MageSquare\Blog\Api\PostRepositoryInterface" type="MageSquare\Blog\Model\Repository\PostRepository" />
+    <preference for="MageSquare\Blog\Api\Data\CategoryInterface" type="MageSquare\Blog\Model\Categories" />
+    <preference for="MageSquare\Blog\Api\CategoryRepositoryInterface" type="MageSquare\Blog\Model\Repository\CategoriesRepository" />
+    <preference for="MageSquare\Blog\Api\Data\CommentInterface" type="MageSquare\Blog\Model\Comments" />
+    <preference for="MageSquare\Blog\Api\CommentRepositoryInterface" type="MageSquare\Blog\Model\Repository\CommentRepository" />
+    <preference for="MageSquare\Blog\Api\VoteRepositoryInterface" type="MageSquare\Blog\Model\Repository\VoteRepository" />
+    <preference for="MageSquare\Blog\Api\Data\GetPostRelatedProductsInterface" type="MageSquare\Blog\Model\ResourceModel\Posts\RelatedProducts\GetPostRelatedProducts" />
+    <preference for="MageSquare\Blog\Api\Data\GetRelatedPostsForProductInterface" type="MageSquare\Blog\Model\ResourceModel\Posts\RelatedProducts\GetRelatedPostsForProduct" />
+    <type name="MageSquare\Blog\Model\Config\Backend\Route">
+        <arguments>
+            <argument name="data" xsi:type="array">
+                <item name="urlHelper" xsi:type="object">MageSquare\Blog\Helper\Url</item>
+            </argument>
+        </arguments>
+    </type>
+    <type name="MageSquare\XmlSitemap\Model\Sitemap">
+        <plugin name="MageSquare_Blog::add-pages-to-sitemap" type="MageSquare\Blog\Plugin\XmlSitemap\Model\Sitemap" />
+    </type>
+    <type name="MageSquare\Blog\Model\Sitemap">
+        <arguments>
+            <argument name="data" xsi:type="array">
+                <item name="date_time" xsi:type="object">Magento\Framework\Stdlib\DateTime\DateTime</item>
+                <item name="url_resolver" xsi:type="object">MageSquare\Blog\Model\UrlResolver</item>
+                <item name="post_repository" xsi:type="object">MageSquare\Blog\Api\PostRepositoryInterface</item>
+                <item name="category_repository" xsi:type="object">MageSquare\Blog\Api\CategoryRepositoryInterface</item>
+                <item name="tag_repository" xsi:type="object">MageSquare\Blog\Api\TagRepositoryInterface</item>
+                <item name="store_manager" xsi:type="object">Magento\Store\Model\StoreManagerInterface</item>
+                <item name="settings_helper" xsi:type="object">MageSquare\Blog\Helper\Settings</item>
+            </argument>
+        </arguments>
+    </type>
+    <type name="MageSquare\Blog\Model\Posts">
+        <arguments>
+            <argument name="data" xsi:type="array">
+                <item name="url_helper" xsi:type="object">MageSquare\Blog\Helper\Url</item>
+                <item name="image_helper" xsi:type="object">MageSquare\Blog\Helper\Image</item>
+                <item name="setting_helper" xsi:type="object">MageSquare\Blog\Helper\Settings</item>
+                <item name="filter_provider" xsi:type="object">Magento\Cms\Model\Template\FilterProvider</item>
+                <item name="view_repository" xsi:type="object">MageSquare\Blog\Api\ViewRepositoryInterface</item>
+                <item name="author_repository" xsi:type="object">MageSquare\Blog\Api\AuthorRepositoryInterface</item>
+            </argument>
+        </arguments>
+    </type>
+
+    <type name="MageSquare\Blog\Model\Comments">
+        <arguments>
+            <argument name="data" xsi:type="array">
+                <item name="url_resolver" xsi:type="object">MageSquare\Blog\Model\UrlResolver</item>
+                <item name="post_repository" xsi:type="object">MageSquare\Blog\Api\PostRepositoryInterface</item>
+            </argument>
+        </arguments>
+    </type>
+
+    <type name="MageSquare\Blog\Model\AbstractModel">
+        <arguments>
+            <argument name="data" xsi:type="array">
+                <item name="category_repository" xsi:type="object">MageSquare\Blog\Api\CategoryRepositoryInterface</item>
+                <item name="categories_collection_factory" xsi:type="object">MageSquare\Blog\Model\ResourceModel\Categories\CollectionFactory</item>
+            </argument>
+        </arguments>
+    </type>
+
+    <type name="Magento\Framework\View\Element\UiComponent\DataProvider\CollectionFactory">
+        <arguments>
+            <argument name="collections" xsi:type="array">
+                <item name="tagged_posts_listing_data_source" xsi:type="string">MageSquare\Blog\Model\ResourceModel\Posts\Collection\Grid</item>
+                <item name="category_posts_listing_data_source" xsi:type="string">MageSquare\Blog\Model\ResourceModel\Posts\Collection\Grid</item>
+                <item name="author_posts_listing_data_source" xsi:type="string">MageSquare\Blog\Model\ResourceModel\Posts\Collection\Grid</item>
+                <item name="comments_listing_data_source" xsi:type="string">MageSquare\Blog\Model\ResourceModel\Comments\Collection\Grid</item>
+                <item name="authors_listing_data_source" xsi:type="string">MageSquare\Blog\Model\ResourceModel\Author\Collection\Grid</item>
+                <item name="tags_listing_data_source" xsi:type="string">MageSquare\Blog\Model\ResourceModel\Tag\Collection\Grid</item>
+                <item name="categories_listing_data_source" xsi:type="string">MageSquare\Blog\Model\ResourceModel\Categories\Collection\Grid</item>
+                <item name="posts_listing_data_source" xsi:type="string">MageSquare\Blog\Model\ResourceModel\Posts\Collection\Grid</item>
+            </argument>
+        </arguments>
+    </type>
+    <virtualType name="MageSquare\Blog\Model\ImageUpload" type="Magento\Catalog\Model\ImageUploader">
+        <arguments>
+            <argument name="baseTmpPath" xsi:type="const">MageSquare\Blog\Model\ImageProcessor::BLOG_MEDIA_TMP_PATH</argument>
+            <argument name="basePath" xsi:type="const">MageSquare\Blog\Model\ImageProcessor::BLOG_MEDIA_PATH</argument>
+            <argument name="allowedExtensions" xsi:type="array">
+                <item name="jpg" xsi:type="string">jpg</item>
+                <item name="jpeg" xsi:type="string">jpeg</item>
+                <item name="gif" xsi:type="string">gif</item>
+                <item name="png" xsi:type="string">png</item>
+            </argument>
+        </arguments>
+    </virtualType>
+    <virtualType name="MageSquare\Blog\Model\Blog\Config\Reader" type="Magento\Framework\Config\Reader\Filesystem">
+        <arguments>
+            <argument name="converter" xsi:type="object">MageSquare\Blog\Model\Blog\Config\Converter</argument>
+            <argument name="schemaLocator" xsi:type="object">MageSquare\Blog\Model\Blog\Config\SchemaLocator</argument>
+            <argument name="fileName" xsi:type="string">blog.xml</argument>
+        </arguments>
+    </virtualType>
+    <virtualType name="MageSquare\Blog\Model\Blog\Config" type="Magento\Framework\Config\Data">
+        <arguments>
+            <argument name="reader" xsi:type="object">MageSquare\Blog\Model\Blog\Config\Reader</argument>
+            <argument name="cacheId" xsi:type="string">msblog_blog</argument>
+        </arguments>
+    </virtualType>
+    <type name="MageSquare\Blog\Helper\Config">
+        <arguments>
+            <argument name="blogConfig" xsi:type="object">MageSquare\Blog\Model\Blog\Config</argument>
+        </arguments>
+    </type>
+    <type name="MageSquare\Blog\Controller\Adminhtml\Uploader\PostImage">
+        <arguments>
+            <argument name="imageUploader" xsi:type="object">MageSquare\Blog\Model\ImageUpload</argument>
+        </arguments>
+    </type>
+    <type name="MageSquare\Blog\Controller\Adminhtml\Uploader\AuthorImage">
+        <arguments>
+            <argument name="imageUploader" xsi:type="object">MageSquare\Blog\Model\ImageUpload</argument>
+        </arguments>
+    </type>
+    <type name="MageSquare\Blog\Model\ImageProcessor">
+        <arguments>
+            <argument name="imageUploader" xsi:type="object">MageSquare\Blog\Model\ImageUpload</argument>
+        </arguments>
+    </type>
+    <type name="MageSquare\Xsearch\Block\Search\Blog">
+        <arguments>
+            <argument name="data" xsi:type="array">
+                <item name="collectionFactory" xsi:type="object">Magento\Framework\Data\CollectionFactory</item>
+                <item name="categoriesCollectionFactory" xsi:type="object">MageSquare\Blog\Model\ResourceModel\Categories\CollectionFactory</item>
+                <item name="tagsCollectionFactory" xsi:type="object">MageSquare\Blog\Model\ResourceModel\Tag\CollectionFactory</item>
+                <item name="postsCollectionFactory" xsi:type="object">MageSquare\Blog\Model\ResourceModel\Posts\CollectionFactory</item>
+                <item name="dataObjectFactory" xsi:type="object">Magento\Framework\DataObjectFactory</item>
+            </argument>
+        </arguments>
+    </type>
+
+    <virtualType name="MageSquare\Blog\Model\Preview\Storage" type="Magento\Framework\Session\Storage">
+        <arguments>
+            <argument name="namespace" xsi:type="string">mslog_preview_session</argument>
+        </arguments>
+    </virtualType>
+
+    <type name="MageSquare\Blog\Model\Preview\PreviewSession">
+        <arguments>
+            <argument name="storage" xsi:type="object">MageSquare\Blog\Model\Preview\Storage</argument>
+        </arguments>
+    </type>
+
+    <type name="MageSquare\Gdpr\Model\Source\CheckboxLocationCombine">
+        <arguments>
+            <argument name="optionGroups" xsi:type="array">
+                <item name="magesquare" xsi:type="array">
+                    <item name="optionSources" xsi:type="array">
+                        <item name="blog" xsi:type="object">MageSquare\Blog\Model\Config\GdprBlog</item>
+                    </item>
+                </item>
+            </argument>
+        </arguments>
+    </type>
+
+    <type name="MageSquare\Gdpr\ViewModel\Adminhtml\System\Config\GdprCommentViewModel">
+        <arguments>
+            <argument name="sectionComments" xsi:type="array">
+                <item name="msblog" xsi:type="array">
+                    <item name="selector" xsi:type="string">#row_msblog_comments_gdpr</item>
+                    <item name="comment" xsi:type="string" translatable="true"><![CDATA[Please disable the setting if you use consent checkboxes configured for Blog Pro form via <a href='%1'>GDPR Consent Checkboxes.</a>]]></item>
+                </item>
+            </argument>
+        </arguments>
+    </type>
+
+    <type name="Magento\Store\ViewModel\SwitcherUrlProvider">
+        <plugin
+            name="MageSquare_Blog::switch_blog_entity_url_when_store_was_switched"
+            type="MageSquare\Blog\Plugin\Store\ViewModel\SwitcherUrlProvider\ReplaceStoreSwitcherUrlForBlogEntities"
+        />
+    </type>
+
+    <!--Add possibility for apply patches before DS start-->
+    <virtualType name="Magento\Framework\Setup\Patch\DeclarativeSchemaApplyBeforeReader" type="Magento\Framework\Setup\Patch\PatchReader">
+        <arguments>
+            <argument name="type" xsi:type="string">declarativeSchemaApplyBefore</argument>
+        </arguments>
+    </virtualType>
+
+    <virtualType name="MageSquare\Blog\Setup\Patch\PatchApplier" type="Magento\Framework\Setup\Patch\PatchApplier">
+        <arguments>
+            <argument name="dataPatchReader" xsi:type="object">Magento\Framework\Setup\Patch\DeclarativeSchemaApplyBeforeReader</argument>
+            <argument name="schemaPatchReader" xsi:type="object">Magento\Framework\Setup\Patch\DeclarativeSchemaApplyBeforeReader</argument>
+        </arguments>
+    </virtualType>
+
+    <type name="MageSquare\Blog\Plugin\Setup\Model\DeclarationInstaller\ApplyPatchesBeforeDeclarativeSchema">
+        <arguments>
+            <argument name="patchApplier" xsi:type="object">MageSquare\Blog\Setup\Patch\PatchApplier</argument>
+        </arguments>
+    </type>
+
+    <type name="Magento\Setup\Model\DeclarationInstaller">
+        <plugin name="MageSquare_Blog::execute-patches-before-schema-apply"
+                type="MageSquare\Blog\Plugin\Setup\Model\DeclarationInstaller\ApplyPatchesBeforeDeclarativeSchema"/>
+    </type>
+    <!--Add possibility for apply patches before DS end-->
+
+    <type name="MageSquare\Blog\Model\ResourceModel\Posts\Save\SavePartProcessorsPool">
+        <arguments>
+            <argument name="savePartQueue" xsi:type="array">
+                <item name="0" xsi:type="array">
+                    <item name="processor" xsi:type="object">MageSquare\Blog\Model\ResourceModel\Posts\Save\SavePostProductRelations</item>
+                    <item name="sortOrder" xsi:type="string">10</item>
+                </item>
+            </argument>
+        </arguments>
+    </type>
+
+    <type name="MageSquare\Blog\Plugin\Store\ViewModel\SwitcherUrlProvider\ReplaceStoreSwitcherUrlForBlogEntities">
+        <arguments>
+            <argument name="categoryRepository" xsi:type="object">MageSquare\Blog\Api\CategoryRepositoryInterface\Proxy</argument>
+            <argument name="tagRepository" xsi:type="object">MageSquare\Blog\Api\TagRepositoryInterface\Proxy</argument>
+            <argument name="authorRepository" xsi:type="object">MageSquare\Blog\Api\AuthorRepositoryInterface\Proxy</argument>
+        </arguments>
+    </type>
+</config>

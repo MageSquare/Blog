@@ -1,0 +1,41 @@
+<?php
+/**
+ * @author MageSquare Team
+ * @copyright Copyright (c) 2021 MageSquare 
+ * @package MageSquare_Blog
+ */
+?>
+<?php
+/** @var MageSquare\Blog\Block\Sidebar\Search $block */
+/** @var \Magento\Framework\Escaper $escaper */
+
+?>
+
+<?php if ($block->getDisplay()): ?>
+    <div class="msblog-search" data-msblog-js="accordion">
+        <div class="msblog-title" data-msblog-js="heading">
+            <?= $escaper->escapeHtml($block->getBlockHeader()); ?>
+        </div>
+        <div class="msblog-item -search msblog-form-search" data-msblog-js="content">
+            <form class="msblog-form-container"
+                  action="<?= $escaper->escapeUrl($block->getSearchUrl()); ?>"
+                  method="get">
+                <div class="input-box msblog-field">
+                    <input type="text"
+                           placeholder="<?= $escaper->escapeHtml(__('Find some...')) ?>"
+                           class="input-text required-entry msblog-input"
+                           id="search-blog"
+                           name="query"
+                           value="<?= $escaper->escapeHtml($block->getQuery()); ?>"
+                           maxlength="100"
+                    />
+                </div>
+                <button class="msblog-btn"
+                        title="<?= $escaper->escapeHtml(__('Search')); ?>"
+                        type="submit">
+                        <?= $escaper->escapeHtml(__('Search')); ?>
+                </button>
+            </form>
+        </div>
+    </div>
+<?php endif; ?>

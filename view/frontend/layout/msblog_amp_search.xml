@@ -1,0 +1,35 @@
+<?xml version="1.0"?>
+<!--
+/**
+ * @author MageSquare Team
+ * @copyright Copyright (c) 2021 MageSquare 
+ * @package MageSquare_Blog
+ */
+-->
+<page xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" layout="" xsi:noNamespaceSchemaLocation="urn:magento:framework:View/Layout/etc/page_configuration.xsd">
+    <update handle="msblog_amp_default"/>
+    <body>
+        <referenceBlock name="blog.page">
+            <referenceContainer name="content">
+                <block class="MageSquare\Blog\Block\Content\Lists\Wrapper" name="msblog.content.list.wrapper" cacheable="false" as="msblog_content_list_wrapper" />
+
+                <referenceContainer name="layout.content">
+                    <block class="MageSquare\Blog\Block\Sidebar\Search"
+                           name="msblog.search.query"
+                           as="searching"
+                           template="MageSquare_Blog::amp/sidebar/search.phtml"/>
+
+                    <block class="MageSquare\Blog\Block\Content\Search"
+                           name="msblog.search.list"
+                           as="list"
+                           template="MageSquare_Blog::amp/list.phtml"/>
+
+                    <block class="MageSquare\Blog\Block\Content\Search"
+                           name="msblog.search.grid"
+                           as="grid"
+                           template="MageSquare_Blog::amp/grid.phtml"/>
+                </referenceContainer>
+            </referenceContainer>
+        </referenceBlock>
+    </body>
+</page>
