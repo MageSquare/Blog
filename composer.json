@@ -17,7 +17,7 @@
     "type": "magento2-module",
     "version": "2.7.1",
     "license": [
-        "Commercial"
+        "proprietary"
     ],
     "autoload": {
         "files": [
@@ -26,5 +26,6 @@
         "psr-4": {
             "MageSquare\\Blog\\": ""
         }
-    }
+    },
+    "minimum-stability": "dev"
 }
