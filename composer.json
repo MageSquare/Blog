@@ -26,5 +26,6 @@
         "psr-4": {
             "MageSquare\\Blog\\": ""
         }
-    }
+    },
+    "minimum-stability": "dev"
 }
