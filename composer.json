@@ -17,8 +17,7 @@
     "type": "magento2-module",
     "version": "2.7.1",
     "license": [
-         "OSL-3.0",
-        "AFL-3.0"
+        "Commercial"
     ],
     "autoload": {
         "files": [
