@@ -4,8 +4,6 @@
     "require": {
         "php": "^7.1.0",
         "magesquare/base": ">=1.0.0",
-        "magesquare/email-unsubscribe": ">=1.0.0",
-        "magesquare/cron-schedule-list": ">=1.0.5",
         "magento/framework": ">=102.0.0",
         "magento/module-catalog": "*"
     },
