@@ -27,5 +27,6 @@
             "MageSquare\\Blog\\": ""
         }
     },
-    "minimum-stability": "stable"
+    "minimum-stability": "stable",
+    "prefer-stable": true 
 }
