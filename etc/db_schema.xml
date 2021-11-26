@@ -419,4 +419,24 @@
             <column name="position"/>
         </index>
     </table>
+
+
+     <table name="magesquare_blog_license" resource="default" engine="innodb" comment="magesquare_blog_license">
+        <column xsi:type="int" name="id" padding="10" unsigned="true" nullable="false" identity="true" comment="License Verified Id"/>
+        <column xsi:type="varchar" name="email" nullable="true" length="255" comment="Email"/>
+        <column xsi:type="varchar" name="c_lc" nullable="true" length="255" comment="License Key"/>
+        <column xsi:type="smallint" name="status" padding="5" unsigned="true" nullable="false" identity="false" comment="Status"/>
+        <column xsi:type="smallint" name="is_verify" padding="5" unsigned="true" nullable="false" identity="false" comment="Is Verify"/>
+        <column xsi:type="text" name="log" nullable="true" comment="Log"/>
+        <column xsi:type="varchar" name="version" nullable="false" length="255" comment="Version"/>
+        <column xsi:type="timestamp" name="last_verify" on_update="false" nullable="true" default="CURRENT_TIMESTAMP" comment="Last Verify License"/>
+        <column xsi:type="timestamp" name="created_at" on_update="false" nullable="false" default="CURRENT_TIMESTAMP" comment="Created At"/>
+        <column xsi:type="timestamp" name="updated_at" on_update="true" nullable="false" default="CURRENT_TIMESTAMP" comment="Updated At"/>
+
+        <constraint xsi:type="primary" referenceId="MAGESQUARE_BLOG_LICENSE_PRIMARY">
+            <column name="id"/>
+        </constraint>
+
+    </table>
+
 </schema>

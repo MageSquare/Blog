@@ -11,6 +11,7 @@ namespace MageSquare\Blog\Controller;
 use MageSquare\Blog\Helper\Url;
 use MageSquare\Blog\Model\PageValidator;
 use MageSquare\Blog\Model\UrlResolver;
+use Magento\Framework\App\Config\ScopeConfigInterface;
 
 class Router implements \Magento\Framework\App\RouterInterface
 {
@@ -19,6 +20,13 @@ class Router implements \Magento\Framework\App\RouterInterface
     const BLOG_POST_URL = 'blogposts';
 
     const MAX_REDIRECT_COUNT = 3;
+
+    /**
+   * @var \Magento\Framework\App\Config\ScopeConfigInterface
+   */
+   protected $scopeConfig;
+
+
 
     /** @var \Magento\Framework\App\ActionFactory */
     private $actionFactory;
@@ -77,7 +85,8 @@ class Router implements \Magento\Framework\App\RouterInterface
         \Magento\Framework\Stdlib\Cookie\PhpCookieManager $cookieManager,
         \Magento\Theme\Block\Html\Pager $pager,
         UrlResolver $urlResolver,
-        \MageSquare\Blog\Helper\Data $dataHelper
+        \MageSquare\Blog\Helper\Data $dataHelper,
+         \Magento\Framework\App\Config\ScopeConfigInterface $scopeConfig
     ) {
         $this->actionFactory = $actionFactory;
         $this->url = $url;
@@ -88,6 +97,8 @@ class Router implements \Magento\Framework\App\RouterInterface
         $this->cookieManager = $cookieManager;
         $this->dataHelper = $dataHelper;
         $this->urlResolver = $urlResolver;
+         $this->scopeConfig = $scopeConfig;
+
     }
 
     /**
@@ -99,11 +110,18 @@ class Router implements \Magento\Framework\App\RouterInterface
      * @throws \Magento\Framework\Stdlib\Cookie\FailureToSendException
      */
     public function match(\Magento\Framework\App\RequestInterface $request)
-    {
+    {   
         $this->detectRedirect($request);
 
         # Result Action
         if ($this->actionRouter->getResult()) {
+            $storeScope = \Magento\Store\Model\ScopeInterface::SCOPE_STORE;
+            $is_verify = $this->scopeConfig->getValue('msblog/license_settings/islc', $storeScope);
+            if($is_verify == 0){
+                $html = "<div style='color:#ff0000;font-weight:500;text-align:center;font-size:20px;'>MageSquare Blog has License issue : Please Activate License or support Contact!</div>";
+                echo $html;
+                return false;
+            }
             # Redirect Flag
             if ($this->actionRouter->getIsRedirect()) {
                 $this->redirectFlagUp();

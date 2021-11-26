@@ -13,7 +13,7 @@
 
 <?php if ($block->getDisplay()): ?>
     <div class="msblog-search" data-msblog-js="accordion">
-        <div class="msblog-title" data-msblog-js="heading">
+        <div class="msblog-title headingfont" data-msblog-js="heading">
             <?= $escaper->escapeHtml($block->getBlockHeader()); ?>
         </div>
         <div class="msblog-item -search msblog-form-search" data-msblog-js="content">
@@ -30,10 +30,8 @@
                            maxlength="100"
                     />
                 </div>
-                <button class="msblog-btn"
-                        title="<?= $escaper->escapeHtml(__('Search')); ?>"
-                        type="submit">
-                        <?= $escaper->escapeHtml(__('Search')); ?>
+        <button class="msblog-btn"  title="<?= $escaper->escapeHtml(__('Search')) ?>" type="submit">
+            <?= $escaper->escapeHtml(__('Search')); ?> 
                 </button>
             </form>
         </div>

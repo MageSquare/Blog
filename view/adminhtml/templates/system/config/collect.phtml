@@ -1,0 +1,88 @@
+<?php
+?>
+<?php 
+    /* @var $block \MageSquare\Blog\Block\System\Config\Collect */
+    $objectManager = \Magento\Framework\App\ObjectManager::getInstance();
+    $islc = $objectManager->get('Magento\Framework\App\Config\ScopeConfigInterface')->getValue('msblog/license_settings/islc');
+ ?>
+
+<script>
+    require([
+        'jquery',
+        'prototype'
+    ], function(jQuery){
+
+        var collectSpan = jQuery('#collect_span');
+        if('<?php echo $islc;?>' == 0){
+            collectSpan.find('.collected').hide();
+            collectSpan.find('.discollected').show();
+            jQuery('#collect_message_span').text("Please enter Valid Email and License Key");
+        }else{
+            collectSpan.find('.collected').show();
+            collectSpan.find('.discollected').hide();
+            jQuery('#collect_message_span').text("License Detail Valid !!");
+        }
+
+        jQuery('#collect_button').click(function (event) {
+            let email = jQuery('#msblog_license_settings_email').val();
+            let license_key = jQuery('#msblog_license_settings_license_key').val();
+            if(email == null || email == "" || license_key == null || license_key == "" ){
+                event.preventDefault();
+                collectSpan.find('.processing').hide();
+                collectSpan.find('.collected').hide();
+                collectSpan.find('.discollected').show();
+                jQuery('#collect_message_span').text("Please enter Valid Email and License Key");
+            }
+            if(email != null && email != "" && license_key != null && license_key != "" ){
+
+                var params = {"email":email,'license_key':license_key};
+                new Ajax.Request('<?php echo $block->getAjaxUrl() ?>', {
+                    parameters:     params,
+                    loaderArea:     false,
+                    asynchronous:   true,
+                    onCreate: function() {
+                        collectSpan.find('.collected').hide();
+                        collectSpan.find('.discollected').hide();
+                        collectSpan.find('.processing').show();
+                        jQuery('#collect_message_span').text('');
+                    },
+                    onSuccess: function(response) { 
+                        collectSpan.find('.processing').hide();
+
+                        // console.log(response.responseJSON.data);
+                        // console.log(response.status);
+
+                        if(response.responseJSON.error){
+                            jQuery('#collect_message_span').text(response.responseJSON.error);
+                            collectSpan.find('.processing').hide();
+                            collectSpan.find('.collected').hide();
+                            collectSpan.find('.discollected').show();
+                        }else{
+                            if(response.responseJSON.data.status){
+                                jQuery('#collect_message_span').text(response.responseJSON.data.msg);
+                                collectSpan.find('.processing').hide();
+                                collectSpan.find('.discollected').hide();
+                                collectSpan.find('.collected').show();
+                            }else{
+                                jQuery('#collect_message_span').text(response.responseJSON.data.msg);
+                                collectSpan.find('.processing').hide();
+                                collectSpan.find('.collected').hide();
+                                collectSpan.find('.discollected').show();
+                            }
+                        }
+                        
+                    }
+                });
+            }
+        });
+
+    });
+</script>
+
+<div class="collect-indicator" id="collect_span" style="margin-bottom: 10px;max-width: 350px;   ">
+    <img class="processing" hidden="hidden" alt="Collecting" style="margin:0 5px" src="<?php echo $block->getViewFileUrl('images/process_spinner.gif') ?>"/>
+    <img class="discollected" hidden="hidden" alt="disCollected" style="margin:-3px 5px" src="<?php echo $block->getViewFileUrl('images/rule_component_remove.gif') ?>"/>
+    <img class="collected" hidden="hidden" alt="Collected" style="margin:-3px 5px" src="<?php echo $block->getViewFileUrl('images/rule_component_apply.gif') ?>"/>
+    <div id="collect_message_span" style="overflow-wrap:break-word;width: 99%;display: inline;"></div>
+</div>
+<?php echo $block->getButtonHtml() ?>

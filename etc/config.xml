@@ -16,6 +16,11 @@
                 <desktop_list>{"layout":"two-columns-right","left_side":[],"right_side":["categories","search","tags","recent-comments","recent-posts"],"content":["list"]}</desktop_list>
                 <desktop_post>{"layout":"two-columns-right","left_side":[],"right_side":["categories","search","tags","recent-comments","recent-posts"],"content":["post"]}</desktop_post>
             </layout>
+            <license_settings>
+                <email></email>
+                <license_key></license_key>
+                <islc>0</islc>
+            </license_settings>
             <display_settings>
                 <display_at_footer>1</display_at_footer>
                 <display_at_toolbar>1</display_at_toolbar>

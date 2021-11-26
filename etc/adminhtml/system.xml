@@ -20,6 +20,28 @@
                 <frontend_model>MageSquare\Blog\Block\Adminhtml\System\Config\Information</frontend_model>
             </group>
 
+
+             <group id="license_settings" translate="label" type="text" sortOrder="20" showInDefault="1" showInWebsite="1" showInStore="1">
+                <label>License Configuration</label>
+               
+                <field id="email" translate="label comment" type="text" sortOrder="10" showInDefault="1">
+                    <label>Email Address</label>
+                </field>
+
+                 <field id="license_key" translate="label comment" type="text" sortOrder="10" showInDefault="1">
+                    <label>License Key</label>
+                </field>
+
+                <field id="islc" translate="label comment" type="text" sortOrder="10" showInDefault="1">
+                    <label>is License </label>
+                </field>
+
+                <field id="verify" translate="label" type="button" sortOrder="10" showInDefault="1">
+                    <frontend_model>MageSquare\Blog\Block\System\Config\Collect</frontend_model>
+                </field>
+
+            </group>
+
             <group id="display_settings" translate="label" type="text" sortOrder="20" showInDefault="1" showInWebsite="1" showInStore="1">
                 <label>Display Settings</label>
 

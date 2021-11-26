@@ -19,7 +19,7 @@ $categoryNumber = 0;
         <?= $escaper->escapeHtml(__('Posted in: ')); ?>
         <?php foreach ($categories as $key => $category): ?>
             <?php $categoryNumber++; ?>
-            <a class="msblog-ref"
+            <a class="msblog-ref refnew"
                href="<?= $escaper->escapeUrl($category->getUrl()); ?>"
                title="<?= $escaper->escapeHtml($category->getName()); ?>">
                 <?= $escaper->escapeHtml($category->getName()); ?></a><?= $categoriesCount > $categoryNumber ? ',' : ''; ?>

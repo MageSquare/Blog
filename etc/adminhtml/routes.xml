@@ -11,5 +11,6 @@
         <route id="magesquare_blog" frontName="magesquare_blog">
             <module name="MageSquare_Blog" />
         </route>
+        
     </router>
 </config>

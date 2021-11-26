@@ -19,7 +19,7 @@ $post = $block->getPost();
         <div class="msblog-item -author">
             <?= $escaper->escapeHtml(__('By ')); ?>
             <a rel="author"
-               class="msblog-ref"
+               class="msblog-ref authernew"
                href="<?= $escaper->escapeUrl($post->getAuthor()->getUrl()); ?>"
                title="<?= $escaper->escapeHtml($post->getPostedBy()); ?>">
                 <?= $escaper->escapeHtml($post->getPostedBy()); ?>

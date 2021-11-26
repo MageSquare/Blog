@@ -20,7 +20,7 @@ $treeHtml = $block->renderCategoriesTreeHtml();
     <?php if ($block->getDisplay()): ?>
         <?php if (!empty(trim($treeHtml))): ?>
             <div data-msblog-js="accordion" class="msblog-widget-container -categories">
-                <div class="msblog-title" data-msblog-js="heading">
+                <div class="msblog-title headingfont" data-msblog-js="heading">
                     <?= $escaper->escapeHtml($block->getBlockHeader()); ?>
                 </div>
                 <div class="msblog-list" data-msblog-js="content">

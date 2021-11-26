@@ -21,15 +21,15 @@ $colorThemeClass = $block->getColorClass();
      id="ms-blog-comment-<?= $escaper->escapeHtmlAttr($block->getMessageId()); ?>">
     <div class="msblog-comment-content <?= $escaper->escapeHtmlAttr($myCommentClass); ?>">
         <div class="msblog-header">
-            <div class="msblog-author">
+            <div class="msblog-author authorname">
                 <svg class="msblog-svg user <?= $escaper->escapeHtmlAttr($colorThemeClass); ?>">
                     <use xlink:href="<?= $escaper->escapeUrl($svgLink); ?>#user"></use>
                 </svg>
                 <?= $escaper->escapeHtml($block->getAuthor()); ?>
             </div>
-            <div class="msblog-date">
+        </div>
+        <div class="msblog-date">
                 <?= $escaper->escapeHtml($block->getDate()); ?>
-            </div>
         </div>
         <?php if ($block->getNeedApproveMessage()): ?>
             <div class="msblog-thesis">
@@ -42,8 +42,7 @@ $colorThemeClass = $block->getColorClass();
         <?php if (!$block->getNeedApproveMessage()): ?>
             <div class="msblog-thesis">
                 <?= $escaper->escapeHtml($block->getContent()); ?>
-            </div>
-            <div class="msblog-reply">
+                <div class="msblog-reply">
                 <a data-id="<?= $escaper->escapeHtmlAttr($block->getMessageId()); ?>"
                    class="msblog-button"
                    title="<?= $escaper->escapeHtmlAttr(__('Reply')); ?>"
@@ -68,6 +67,8 @@ $colorThemeClass = $block->getColorClass();
                 <?php endif; ?>
 
             </div>
+            </div>
+            
         <?php endif; ?>
     </div>
     <div class="msblog-replies-block <?= $escaper->escapeHtmlAttr($levelTopClass); ?>"

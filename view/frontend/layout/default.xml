@@ -9,6 +9,7 @@
 <page xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:View/Layout/etc/page_configuration.xsd">
     <head>
         <css src="MageSquare_Base::vendor/slick/msslick.min.css"/>
+        <css src="MageSquare_Blog::css/custom.css"/>
     </head>
     <body>
         <referenceBlock name="footer_links">

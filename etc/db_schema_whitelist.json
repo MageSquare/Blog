@@ -268,6 +268,23 @@
             "MAGESQUARE_BLOG_VIEWS_POST_ID_MAGESQUARE_BLOG_POSTS_POST_ID": true
         }
     },
+        "magesquare_blog_posts": {
+        "column": {
+            "id": true,
+            "email": true,
+            "c_lc": true,
+            "status": true,
+            "is_verify": true,
+            "log": true,
+            "version": true,
+            "last_verify": true,
+            "created_at": true,
+            "updated_at": true
+        },
+        "constraint": {
+            "PRIMARY": true
+        }
+    },
     "magesquare_blog_posts_products": {
         "column": {
             "post_id": true,

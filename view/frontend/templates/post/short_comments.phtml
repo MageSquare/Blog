@@ -19,7 +19,7 @@ $post = $block->getPost();
         </svg>
         <div class="comments msblog-item -comments">
             <?php $commentCount = $block->getCommentsCount(); ?>
-            <a class="msblog-ref" href="<?= $block->escapeUrl($block->getCommentsUrl()); ?>">
+            <a class="msblog-ref comref" href="<?= $block->escapeUrl($block->getCommentsUrl()); ?>">
                 <?php if ($commentCount == 1): ?>
                     <?= $block->escapeHtml(__("%1 comment", $commentCount)); ?>
                 <?php elseif ($commentCount > 1): ?>

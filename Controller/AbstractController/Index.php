@@ -50,7 +50,6 @@ class Index extends Action
         $page = $this->resultPageFactory->create();
         $this->metaDataResolver->resolve($page);
         $this->registry->register(Registry::INDEX_PAGE, true, true);
-
         return $page;
     }
 }

@@ -28,11 +28,19 @@ $collection = $block->getCollection();
                         </a>
                     <?php endif; ?>
                 </div>
-                <div class="msblog-tags">
+                <div class="msblog-tags tag1">
                     <?= $block->getTagsHtml($post); ?>
                 </div>
+                <div class="msblog-footer">
+                        <div class="msblog-features">
+                            <?= $block->getCategoriesHtml($post); ?>
+                            <?= $block->getAuthorHtml($post); ?>
+                            <?= $block->getShortCommentsHtml($post); ?>
+                        </div>
+                   
+                    </div>
                 <div class="msblog-content">
-                    <h2 class="msblog-title">
+                    <h2 class="msblog-title titlenew">
                         <a href="<?= $escaper->escapeUrl($post->getUrl()); ?>"
                            class="msblog-headline"
                            title=" <?= $escaper->escapeHtml($post->getTitle()); ?>"
@@ -40,8 +48,15 @@ $collection = $block->getCollection();
                             <?= $escaper->escapeHtml($post->getTitle()); ?>
                         </a>
                     </h2>
+                     
                     <div class="msblog-shot">
                         <?= /* @noEscape */ $post->getShortContent(); ?>
+                            <a class="msblog-read msblog-read1 btn btn-primary"
+                               href="<?= $escaper->escapeUrl($block->getReadMoreUrl($post)); ?>"
+                               title="<?= $escaper->escapeHtml(__('Read More')); ?>">
+                                <?= $escaper->escapeHtml(__('Read More...')); ?>
+                               
+                            </a>
                     </div>
                     <div class="msblog-bottom">
                         <div class="msblog-date">
@@ -58,21 +73,8 @@ $collection = $block->getCollection();
                         <?php endif; ?>
                     </div>
                 </div>
-                <div class="msblog-footer">
-                    <div class="msblog-features">
-                        <?= $block->getCategoriesHtml($post); ?>
-                        <?= $block->getAuthorHtml($post); ?>
-                        <?= $block->getShortCommentsHtml($post); ?>
-                    </div>
-                    <div class="msblog-more">
-                        <a class="msblog-read"
-                           href="<?= $escaper->escapeUrl($block->getReadMoreUrl($post)); ?>"
-                           title="<?= $escaper->escapeHtml(__('Read More')); ?>">
-                            <?= $escaper->escapeHtml(__('Read More')); ?>
-                            <span class="msblog-arrow"></span>
-                        </a>
-                    </div>
-                </div>
+               
+                
             </div>
         <?php endforeach; ?>
         <?= $block->getToolbarHtml(); ?>

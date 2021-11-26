@@ -16,12 +16,13 @@ $collection = $block->getCollection();
     <?php foreach ($collection as $category): ?>
         <?php $activeClass = $category->getIsActive() ? 'active' : ''; ?>
         <li class="msblog-category <?= /* @noEscape */ $activeClass; ?> msblog-category-<?= (int)$category->getId(); ?>">
-            <a class="msblog-link"
+            <a class="msblog-link newmsblog-link"
                title="<?= $escaper->escapeHtmlAttr($category->getName()); ?>"
                href="<?= $escaper->escapeUrl($category->getUrl()); ?>">
                 <?= $escaper->escapeHtml($category->getName()); ?>
-                <span class="msblog-category-count">(<?= $escaper->escapeHtml($block->getPostsCount($category->getId())); ?>)</span>
+                 <span class="msblog-category-count">(<?= $escaper->escapeHtml($block->getPostsCount($category->getId())); ?>)</span>
             </a>
+
 
             <?php if ($category->hasActiveChildren()): ?>
                 <ul class="msblog-categories -level<?= $category->getLevel() + 1; ?>">
